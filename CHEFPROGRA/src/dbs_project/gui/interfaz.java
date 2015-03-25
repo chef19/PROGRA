@@ -5,17 +5,30 @@
  */
 package dbs_project.gui;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import dbs_project.structures.Queue;
+
 /**
  *
  * @author Kevin Matamoros
  */
 public class interfaz extends javax.swing.JFrame {
-
+modificando_tabla modifica=null;
+DefaultTableModel modelo = new DefaultTableModel(); 
+Queue Datos =null;
     /**
      * Creates new form interfaz
      */
     public interfaz() {
         initComponents();
+        modifica = new modificando_tabla();
+        modelo.addColumn("Name");
+        modelo.addColumn("Street");
+        modelo.addColumn("Number Street");
+        modelo.addColumn("City");
+        this.tabla.setModel(modelo);
+        
     }
 
     /**
@@ -28,20 +41,23 @@ public class interfaz extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
+        tabla = new javax.swing.JTable();
+        btn_idTabla = new javax.swing.JButton();
+        text_idTabla = new javax.swing.JTextField();
+        btn_borrarTabla = new javax.swing.JButton();
+        btn_visualizarMetadatos = new javax.swing.JButton();
+        btn_nuevaColumna = new javax.swing.JButton();
+        btn_nuevaFila = new javax.swing.JButton();
+        btn_eliminarColumna = new javax.swing.JButton();
+        btn_eliminarFila = new javax.swing.JButton();
+        text_nombreColumna = new javax.swing.JTextField();
+        btn_intCelda = new javax.swing.JButton();
+        btn_intColumna = new javax.swing.JButton();
+        valor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -49,46 +65,114 @@ public class interfaz extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Dato", "Dato", "Dato ", "Dato"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
 
-        jButton1.setText("RENOMBRAR");
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
 
-        jButton2.setText("BORRAR TABLA");
+        btn_idTabla.setText("ID TABLA:");
 
-        jButton3.setText("VISUALIZAR METADATOS");
+        btn_borrarTabla.setText("BORRAR TABLA");
+        btn_borrarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_borrarTablaActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("NUEVA COLUMNA");
+        btn_visualizarMetadatos.setText("VISUALIZAR METADATOS");
 
-        jButton5.setText("NUEVA FILA");
+        btn_nuevaColumna.setText("NUEVA COLUMNA");
+        btn_nuevaColumna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_nuevaColumnaActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("ELIMINAR COLUMNA");
+        btn_nuevaFila.setText("NUEVA FILA");
+        btn_nuevaFila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_nuevaFilaActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("ELIMINAR FILA");
+        btn_eliminarColumna.setText("ELIMINAR COLUMNA");
+        btn_eliminarColumna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarColumnaActionPerformed(evt);
+            }
+        });
+
+        btn_eliminarFila.setText("ELIMINAR FILA");
+        btn_eliminarFila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarFilaActionPerformed(evt);
+            }
+        });
+
+        btn_intCelda.setText("CELDA");
+        btn_intCelda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_intCeldaActionPerformed(evt);
+            }
+        });
+
+        btn_intColumna.setText("COLUMNA");
+        btn_intColumna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_intColumnaActionPerformed(evt);
+            }
+        });
+
+        valor.setText("VALOR");
+        valor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_idTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_borrarTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_visualizarMetadatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(text_idTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_nuevaColumna, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_nuevaFila, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_eliminarColumna, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_eliminarFila, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(218, 218, 218)
+                                .addComponent(btn_intCelda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_intColumna)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(valor))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(text_nombreColumna, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,31 +180,78 @@ public class interfaz extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(26, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_idTabla)
+                            .addComponent(text_idTabla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(btn_borrarTabla)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7)
-                        .addGap(20, 20, 20))))
+                        .addComponent(btn_visualizarMetadatos))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(132, 132, 132)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_nuevaColumna)
+                    .addComponent(text_nombreColumna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_nuevaFila)
+                .addGap(18, 18, 18)
+                .addComponent(btn_eliminarColumna)
+                .addGap(18, 18, 18)
+                .addComponent(btn_eliminarFila)
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_intCelda)
+                    .addComponent(btn_intColumna)
+                    .addComponent(valor))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_nuevaColumnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevaColumnaActionPerformed
+        // TODO add your handling code here:
+        String nombre = text_nombreColumna.getText();
+        System.out.println(nombre);
+        modelo.addColumn(nombre);
+    }//GEN-LAST:event_btn_nuevaColumnaActionPerformed
+
+    private void btn_intCeldaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_intCeldaActionPerformed
+        // TODO add your handling code here:
+        modifica.mostrar_celdaelegida(tabla);
+        
+        
+    }//GEN-LAST:event_btn_intCeldaActionPerformed
+
+    private void btn_intColumnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_intColumnaActionPerformed
+        // TODO add your handling code here:
+        modifica.mostrar_columnaelegida(tabla);
+    }//GEN-LAST:event_btn_intColumnaActionPerformed
+
+    private void valorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valorActionPerformed
+        // TODO add your handling code here:
+        modifica.mostrar_valorcelda(tabla);
+    }//GEN-LAST:event_valorActionPerformed
+
+    private void btn_borrarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_borrarTablaActionPerformed
+        // TODO add your handling code here:
+        modifica.eliminar_tabla(tabla);
+    }//GEN-LAST:event_btn_borrarTablaActionPerformed
+
+    private void btn_eliminarColumnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarColumnaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_eliminarColumnaActionPerformed
+
+    private void btn_eliminarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarFilaActionPerformed
+        // TODO add your handling code here:
+        modelo.removeRow(tabla.getSelectedRow());
+    }//GEN-LAST:event_btn_eliminarFilaActionPerformed
+
+    private void btn_nuevaFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevaFilaActionPerformed
+        // TODO add your handling code here:
+        String [] agrega={""};
+        modelo.addRow(agrega);
+    }//GEN-LAST:event_btn_nuevaFilaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,16 +289,23 @@ public class interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton btn_borrarTabla;
+    private javax.swing.JButton btn_eliminarColumna;
+    private javax.swing.JButton btn_eliminarFila;
+    private javax.swing.JButton btn_idTabla;
+    private javax.swing.JButton btn_intCelda;
+    private javax.swing.JButton btn_intColumna;
+    private javax.swing.JButton btn_nuevaColumna;
+    private javax.swing.JButton btn_nuevaFila;
+    private javax.swing.JButton btn_visualizarMetadatos;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tabla;
+    private javax.swing.JTextField text_idTabla;
+    private javax.swing.JTextField text_nombreColumna;
+    private javax.swing.JButton valor;
     // End of variables declaration//GEN-END:variables
+
+    private void tablaaddColumn(TableColumn tableColumn) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

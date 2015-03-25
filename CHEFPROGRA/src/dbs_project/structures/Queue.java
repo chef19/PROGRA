@@ -11,7 +11,7 @@ import dbs_project.structures.LinearDataStructure;
  */
 public interface Queue<T> extends LinearDataStructure<T> {
 	
-	void enqueue(T element);
+	public void enqueue(T element);
 	
 	T dequeue();
 	
