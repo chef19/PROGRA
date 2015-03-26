@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dbs_project.structures;
+package dbs_project.storage.impl;
 
 /**
  *
