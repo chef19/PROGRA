@@ -1,4 +1,6 @@
-public class LinearList {
+package dbs_project.storage.impl;
+
+public class LinearList implements LinearList{
     private Nodo head;
     private Nodo current;
     private Nodo tail;
@@ -126,28 +128,28 @@ public class LinearList {
     }
     
     public void goToPos(int pos) {
-		if (pos > position) {
-			while (pos > position) {
-				this.next();
-			}
-		} else if (pos < position) {
-			while (pos < position) {
-				previous();
-			}
-		}
-	}
+        if (pos > position) {
+                while (pos > position) {
+                        this.next();
+                }
+        } else if (pos < position) {
+                while (pos < position) {
+                        previous();
+                }
+        }
+    }
     
     public int getPositionOfElement(Object element) {
-		Nodo temporal = head;
-		int position = -1;
-		while (temporal != null) {
-			if (temporal.getElemento() != null && temporal.getElemento().equals(element)){
-				return position;
-			}
-			temporal = temporal.getNext();
-			position++;
-		}
-		return -1;
+        Nodo temporal = head;
+        int position = -1;
+        while (temporal != null) {
+            if (temporal.getElemento() != null && temporal.getElemento().equals(element)){
+                return position;
+            }
+            temporal = temporal.getNext();
+            position++;
+        }
+        return -1;
     }
     
     public static void main(String[] args) {
