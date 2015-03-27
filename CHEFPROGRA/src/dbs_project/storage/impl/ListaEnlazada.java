@@ -14,11 +14,11 @@ import dbs_project.structures.LinearList;
  * @author max
  */
 public class ListaEnlazada implements LinearList {
-    private Nodo head;
-    private Nodo current;
-    private Nodo tail;
-    private int position;
-    private int size;
+    public Nodo head;
+    public Nodo current;
+    public Nodo tail;
+    public int position;
+    public int size;
     
     public ListaEnlazada(){
         head=null;
