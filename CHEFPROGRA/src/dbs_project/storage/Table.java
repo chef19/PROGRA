@@ -8,7 +8,8 @@ import dbs_project.exceptions.NoSuchColumnException;
 import dbs_project.exceptions.NoSuchRowException;
 import dbs_project.exceptions.SchemaMismatchException;
 
-import org.apache.commons.collections.primitives.IntIterator;
+/**import org.apache.commons.collections.primitives.IntIterator;
+*/
 
 /**
  * Interface for a relation in the database.
