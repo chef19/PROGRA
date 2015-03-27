@@ -4,7 +4,7 @@ package dbs_project.structures;
 /**
  * This interface represents a common father for all 4 data structures.
  *
- * @author Isaac Alpízar Chacón
+ * @author Isaac Alpzar Chacn
  *
  */
 public interface LinearDataStructure<T> {

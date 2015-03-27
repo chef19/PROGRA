@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dbs_project.gui;
+package dbs_project.gui.impl;
 
 import javax.swing.JOptionPane;
 import javax.swing.JTable;

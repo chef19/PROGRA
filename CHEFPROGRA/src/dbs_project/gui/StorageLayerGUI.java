@@ -1,5 +1,7 @@
 package dbs_project.gui;
 
+import dbs_project.gui.impl.INICIAL;
+
 public class StorageLayerGUI {
 	/**
 	 * A call to the main method of the StorageLayerGUI should display the graphical user interface
