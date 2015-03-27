@@ -5,30 +5,31 @@
  */
 package dbs_project.storage.impl;
 
-import dbs_project.storage.impl.Nodo;
 import dbs_project.structures.DataStructure;
-import dbs_project.structures.Queue;
+import dbs_project.structures.Stack;
 
 /**
  *
  * @author max
  */
-public class Cola implements Queue {
+public class Pila implements Stack{
     public Nodo top;
     public int size;
     
-    public Cola(){
+    public Pila(){
         this.top=null;
         this.size=0;
     }
+    
     @Override
-    public void enqueue(Object element) {
+    public void push(Object element) {
         top=new Nodo(element,top);
         size++;
-        System.out.println(element);    }
+        System.out.println(element);
+    }
 
     @Override
-    public Object dequeue() {
+    public Object pop() {
         if(top==null || size==0){
             System.out.println("Pila vacia");
         }
@@ -40,7 +41,7 @@ public class Cola implements Queue {
     }
 
     @Override
-    public Object first() {
+    public Object top() {
         if(size==0){
             System.out.println("Pila vacia");
             return null;
@@ -77,6 +78,5 @@ public class Cola implements Queue {
             System.out.println(false);
             return false;
         }
-    }
-    
+    } 
 }
