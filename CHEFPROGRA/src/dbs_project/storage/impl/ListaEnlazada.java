@@ -30,6 +30,11 @@ public class ListaEnlazada implements LinearList {
     
     public void insert(Object element) {
         Nodo NuevoNodo = new Nodo(element, current.getNext());
+        if (size==0){
+            current=NuevoNodo;
+            tail=NuevoNodo;
+            head=NuevoNodo;
+        }
         current.setNext(NuevoNodo);
         if(current==tail){
             tail=tail.getNext();
