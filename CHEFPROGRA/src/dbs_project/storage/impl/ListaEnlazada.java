@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dbs_project.structures;
+package dbs_project.storage.impl;
 
 import dbs_project.storage.impl.Nodo;
+import dbs_project.structures.DataStructure;
+import dbs_project.structures.LinearList;
 
 /**
  *
