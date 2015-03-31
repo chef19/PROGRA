@@ -8,6 +8,8 @@ package dbs_project.gui.impl;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import dbs_project.structures.Queue;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -23,11 +25,12 @@ Queue Datos =null;
     public interfaz() {
         initComponents();
         modifica = new modificando_tabla();
-        modelo.addColumn("Name");
+        /**modelo.addColumn("Name");
         modelo.addColumn("Street");
         modelo.addColumn("Number Street");
         modelo.addColumn("City");
         this.tabla.setModel(modelo);
+        **/
         
     }
 
@@ -211,16 +214,17 @@ Queue Datos =null;
 
     private void btn_nuevaColumnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nuevaColumnaActionPerformed
         // TODO add your handling code here:
-        String nombre = text_nombreColumna.getText();
+        TableColumn col = new TableColumn(modelo.getColumnCount());
+        Object nombre = text_nombreColumna.getText();
         System.out.println(nombre);
-        modelo.addColumn(nombre);
+        //modelo.addColumn(nombre);
+        col.setHeaderValue(nombre);
+        tabla.addColumn(col);
     }//GEN-LAST:event_btn_nuevaColumnaActionPerformed
 
     private void btn_intCeldaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_intCeldaActionPerformed
         // TODO add your handling code here:
         modifica.mostrar_celdaelegida(tabla);
-        
-        
     }//GEN-LAST:event_btn_intCeldaActionPerformed
 
     private void btn_intColumnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_intColumnaActionPerformed
@@ -240,6 +244,28 @@ Queue Datos =null;
 
     private void btn_eliminarColumnaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarColumnaActionPerformed
         // TODO add your handling code here:
+        //hhhhhhhhh
+        //jjjj
+        int tem=tabla.getSelectedColumn();
+        if (tem!=-1){
+            tabla.removeColumn(tabla.getColumnModel().getColumn(tem));
+        }
+        else{
+            JOptionPane.showMessageDialog(tabla, "No selecciono ninguna columna o no existen columnas!");
+        }
+        //nnkllllj
+        //modifica.mostrar_columnaelegida(tabla);   
+        /**
+        System.out.println(tem);
+        if (tem!=-1){
+            modelo.columnRemoved
+        (tabla.getColumnModel().getColumn(tem));
+        }
+        else{
+            JOptionPane.showMessageDialog(tabla, "No selecciono ninguna columna o no existen columnas!");
+        }
+        **/
+        //TableColumn column = tabla.getColumnModel().getColumn(tem);//me da la columna
     }//GEN-LAST:event_btn_eliminarColumnaActionPerformed
 
     private void btn_eliminarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarFilaActionPerformed
