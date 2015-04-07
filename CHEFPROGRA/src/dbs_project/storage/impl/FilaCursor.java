@@ -17,9 +17,11 @@ import java.util.Date;
  */
 public class FilaCursor implements RowCursor{
     public ListaEnlazada tabla;
+    public int posicion;
     
     
-    public FilaCursor(ListaEnlazada Tabla){
+    public FilaCursor(int posicion,ListaEnlazada Tabla){
+        this.posicion=posicion;
         this.tabla=Tabla;
         
     }
@@ -89,7 +91,7 @@ public class FilaCursor implements RowCursor{
 
     @Override
     public int getCursorPosition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.posicion;
     }
 
     @Override

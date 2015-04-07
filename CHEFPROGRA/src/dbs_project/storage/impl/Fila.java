@@ -26,48 +26,55 @@ public class Fila implements Row {
     
     @Override
     public RowMetaData getMetaData() {
-        
-        Cola Datos = new Cola();
-            Fila.goToPos(posicion);
-            Datos.enqueue(Fila.getElement());
-        
-        return (RowMetaData) Datos;
+       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
-            
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            Fila.goToPos(index);
+            return (int) Fila.getElement();
+        
     }
 
     @Override
     public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Fila.goToPos(index);
+        return (boolean) Fila.getElement();
     }
 
     @Override
     public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Fila.goToPos(index);
+        return (double) Fila.getElement();
     }
 
     @Override
     public Date getDate(int index) throws IndexOutOfBoundsException, ClassCastException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Fila.goToPos(index);
+        return (Date) Fila.getElement();
     }
 
     @Override
     public String getString(int index) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Fila.goToPos(index);
+        return (String) Fila.getElement();
     }
 
     @Override
     public Object getObject(int index) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Fila.goToPos(index);
+        return (Object) Fila.getElement();
     }
 
     @Override
     public boolean isNull(int index) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Fila.goToPos(index);
+        if(Fila.getElement()==null){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     @Override
