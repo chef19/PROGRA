@@ -14,15 +14,15 @@ import dbs_project.storage.Type;
  * @author Kevin Matamoros
  */
 public class ColumnData implements ColumnMetaData{
-
-    public ColumnData(){
-        int size=0;
+    public ListaEnlazada Columna;
+    
+    public ColumnData(ListaEnlazada Columna){
+        this.Columna = Columna;
     }
     
     @Override
-    public int getRowCount() {
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getRowCount() {     
+        return Columna.size();
     }
 
     @Override
@@ -54,5 +54,4 @@ public class ColumnData implements ColumnMetaData{
     public String getName() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }
