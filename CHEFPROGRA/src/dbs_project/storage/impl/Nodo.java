@@ -9,29 +9,29 @@ package dbs_project.storage.impl;
  *
  * @author kevin
  */
-public class Nodo {
-    public Object element;
+public class Nodo<T> {
+    public T element;
     public Nodo next;
     
     public Nodo(){
         this.element=null;
         this.next=null;
     }
-    public Nodo(Object element){
+    public Nodo(T element){
         this.element=element;
         this.next=null;
     }
-    public Nodo(Object element,Nodo next){
+    public Nodo(T element,Nodo next){
         this.element=element;
         this.next=next;
     }
     public Nodo getNext(){
         return next;
     }
-    public Object getElemento(){
+    public T getElemento(){
         return element;
     }
-    public void setElemento(Object element){
+    public void setElemento(T element){
         this.element=element;
     }
     public void setNext(Nodo next){

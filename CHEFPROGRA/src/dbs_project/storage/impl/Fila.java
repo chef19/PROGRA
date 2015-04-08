@@ -31,8 +31,8 @@ public class Fila implements Row {
 
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
-            Fila.goToPos(index);
-            return (int) Fila.getElement();
+        Fila.goToPos(index);
+        return (int) Fila.getElement();
         
     }
 

@@ -177,10 +177,4 @@ public class ListaEnlazada<T> implements LinearList<T> {
         }
         return false;
     }
-
-    void goToPos(IntIterator rowIDs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-
 }

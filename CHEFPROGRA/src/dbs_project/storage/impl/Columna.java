@@ -50,18 +50,27 @@ public class Columna implements Column{
     @Override
     public Date getDate(int index) throws IndexOutOfBoundsException, ClassCastException {
         Columna.goToPos(index);
+        if(Columna.getElement()==null){
+            return null;
+        }
         return (Date) Columna.getElement();
     }
 
     @Override
     public String getString(int index) throws IndexOutOfBoundsException {
         Columna.goToPos(index);
+        if(Columna.getElement()==null){
+            return null;
+        }
         return (String) Columna.getElement();
     }
 
     @Override
     public Object getObject(int index) throws IndexOutOfBoundsException {
         Columna.goToPos(index);
+        if(Columna.getElement()==null){
+            return null;
+        }
         return Columna.getElement();
     }
 

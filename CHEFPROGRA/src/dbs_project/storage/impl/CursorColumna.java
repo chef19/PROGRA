@@ -6,6 +6,7 @@
 package dbs_project.storage.impl;
 
 import dbs_project.storage.ColumnCursor;
+import dbs_project.storage.impl.Columna;
 import dbs_project.storage.ColumnMetaData;
 import dbs_project.structures.DataStructure;
 import dbs_project.structures.LinearDataStructure;
@@ -18,49 +19,59 @@ import java.util.Date;
 public class CursorColumna implements ColumnCursor{
 
     public ListaEnlazada Columnas;
+    public Columna Columna;
     
     public CursorColumna(ListaEnlazada Columnas){
         this.Columnas = Columnas;
+        this.Columna=null;
     }
     
     @Override
     public ColumnMetaData getMetaData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Columna=(Columna) Columnas.current.getElemento();
+        return Columna.getMetaData();
     }
 
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Columna=(Columna) Columnas.current.getElemento();
+        return Columna.getInteger(index);
     }
 
     @Override
     public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Columna=(Columna) Columnas.current.getElemento();
+        return Columna.getBoolean(index);
     }
 
     @Override
     public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Columna=(Columna) Columnas.current.getElemento();
+        return Columna.getDouble(index);
     }
 
     @Override
     public Date getDate(int index) throws IndexOutOfBoundsException, ClassCastException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Columna=(Columna) Columnas.current.getElemento();
+        return Columna.getDate(index);
     }
 
     @Override
     public String getString(int index) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Columna=(Columna) Columnas.current.getElemento();
+        return Columna.getString(index);
     }
 
     @Override
     public Object getObject(int index) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Columna=(Columna) Columnas.current.getElemento();
+        return Columna.getObject(index);
     }
 
     @Override
     public boolean isNull(int index) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Columna=(Columna) Columnas.current.getElemento();
+        return Columna.isNull(index);
     }
 
     @Override
