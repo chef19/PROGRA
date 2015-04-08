@@ -155,7 +155,7 @@ public class ListaEnlazada<T> implements LinearList<T> {
 
     @Override
     public DataStructure getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return DataStructure.LINKEDLIST;
     }
 
     @Override

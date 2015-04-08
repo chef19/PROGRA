@@ -87,6 +87,30 @@ public class Columna implements Column{
 
     @Override
     public LinearDataStructure<?> asLinearDataStructure(DataStructure type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Pila NuevaPila= new Pila();
+        Cola NuevaCola= new Cola();
+        int i=0;
+        if (type==DataStructure.STACK){
+            while(i>Columna.size){
+                NuevaPila.push(Columna.current);
+                Columna.next();
+                i++;
+            }
+            return NuevaPila;
+        }
+        else if (type==DataStructure.QUEUE){
+            while(i>Columna.size){
+                NuevaCola.enqueue(Columna.current);
+                Columna.next();
+                i++;
+            }
+            return NuevaCola;
+        }
+        else if (type==DataStructure.LINKEDLIST){
+            return Columna;
+        }
+        else if (type==DataStructure.DOUBLYLINKEDLIST){
+        
+        }
     }
 }

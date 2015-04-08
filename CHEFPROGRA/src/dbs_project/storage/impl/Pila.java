@@ -65,7 +65,7 @@ public class Pila<T> implements Stack<T>{
 
     @Override
     public DataStructure getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return DataStructure.STACK;
     }
 
     @Override

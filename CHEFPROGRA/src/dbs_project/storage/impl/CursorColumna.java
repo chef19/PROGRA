@@ -96,7 +96,7 @@ public class CursorColumna implements ColumnCursor{
 
     @Override
     public DataStructure getType() {
-        return DataStructure.DOUBLYLINKEDLIST;
+        return DataStructure.LINKEDLIST;
     }
     
 }
