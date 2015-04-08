@@ -112,5 +112,6 @@ public class Columna implements Column{
         else if (type==DataStructure.DOUBLYLINKEDLIST){
         
         }
+        return null;
     }
 }

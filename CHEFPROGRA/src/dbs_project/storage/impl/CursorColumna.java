@@ -76,7 +76,8 @@ public class CursorColumna implements ColumnCursor{
 
     @Override
     public LinearDataStructure<?> asLinearDataStructure(DataStructure type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Columna=(Columna) Columnas.current.getElemento();
+        return Columna.asLinearDataStructure(type);
     }
 
     @Override
