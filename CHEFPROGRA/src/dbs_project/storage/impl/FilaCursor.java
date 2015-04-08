@@ -17,62 +17,61 @@ import org.apache.commons.collections.primitives.IntIterator;
  * @author Kevin Matamoros
  */
 public class FilaCursor implements RowCursor{
-    public ListaEnlazada fila;
-    public int ID;
-    public IntIterator elementos;
+    public  Fila fila;
+    public ListaEnlazada Filas;
     
     
-    public FilaCursor(int ID,ListaEnlazada Fila){
-        this.ID=ID;
-        this.fila=Fila;
-        this.elementos=elementos;
+    public FilaCursor(ListaEnlazada Filas){
+        this.fila=null;
+        this.Filas=Filas;
         
     }
     @Override
     public RowMetaData getMetaData() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        fila=(Fila) Filas.current.getElemento();
+        return fila.getMetaData();
     }
 
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
-         fila.goToPos(index);
-         return (int) fila.getElement();
+         fila=(Fila) Filas.current.getElemento();
+         return (int) fila.getInteger(index);
     }
 
     @Override
     public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
-        fila.goToPos(index);
-        return (boolean) fila.getElement();
+        fila=(Fila) Filas.current.getElemento();
+        return (boolean) fila.getBoolean(index);
     }
 
     @Override
     public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
-        fila.goToPos(index);
-        return (double) fila.getElement();
+        fila=(Fila) Filas.current.getElemento();
+        return (double) fila.getDouble(index);
     }
 
     @Override
     public Date getDate(int index) throws IndexOutOfBoundsException, ClassCastException {
-        fila.goToPos(index);
-        return (Date) fila.getElement();
+        fila=(Fila) Filas.current.getElemento();
+        return (Date) fila.getDate(index);
     }
 
     @Override
     public String getString(int index) throws IndexOutOfBoundsException {
-        fila.goToPos(index);
-        return (String) fila.getElement();
+        fila=(Fila) Filas.current.getElemento();
+        return (String) fila.getString(index);
     }
 
     @Override
     public Object getObject(int index) throws IndexOutOfBoundsException {
-        fila.goToPos(index);
-        return (Object) fila.getElement();
+        fila=(Fila) Filas.current.getElemento();
+        return (Object) fila.getObject(index);
     }
 
     @Override
     public boolean isNull(int index) throws IndexOutOfBoundsException {
-        fila.goToPos(index);
-        if(fila.getElement()==null){
+        fila=(Fila) Filas.current.getElemento();
+        if(fila.isNull(index)){
             return true;
         }
         else{
@@ -88,12 +87,12 @@ public class FilaCursor implements RowCursor{
 
     @Override
     public boolean next() {
-        return elementos.hasNext();
+     return Filas.next();
     }
 
     @Override
     public int getCursorPosition() {
-        return this.ID;
+        return Filas.getPosition();
     }
 
     @Override
@@ -103,7 +102,7 @@ public class FilaCursor implements RowCursor{
 
     @Override
     public DataStructure getType() {
-        return DataStructure.DOUBLYLINKEDLIST;
+        return DataStructure.LINKEDLIST;
     }
     public static void main(String[] args) {
         // TODO code application logic here
@@ -112,9 +111,11 @@ public class FilaCursor implements RowCursor{
     asdf.append(2);
     asdf.append(3);
     asdf.append(4);
-    asdf.append(5);
-    FilaCursor F = new FilaCursor(2,asdf);
-    System.out.println(F.getInteger(3));
+    asdf.append("Hola");
+    FilaCursor F = new FilaCursor(asdf);
+    System.out.println(F.getString(4));
+    System.out.println(F.getCursorPosition());
+    
     }
     
     

@@ -24,16 +24,17 @@ import org.apache.commons.collections.primitives.IntIterator;
  * @author Kevin Matamoros
  */
 public class Tabla implements Table{
-    ListaEnlazada Tabl;
     ListaEnlazada Fil;
     
     FilaCursor FilCursor;
     
     public Row Fila;
-    public int FilaID;
     
     
+    public Tabla(){
+    }
     public Tabla(Row fila){
+
         this.Fila=fila;
         
         
@@ -52,12 +53,8 @@ public class Tabla implements Table{
     @Override
     public int addRow(Row row) throws SchemaMismatchException {
         Fil = new ListaEnlazada();
-        
-        Fil.insert(row);
-        this.FilaID=FilaID+1;
-        FilCursor=new FilaCursor(FilaID,Fil);
-        
-        return FilaID;
+        Fil.append(row);
+        return Fil.size()-1;
     }
 
     @Override
@@ -147,7 +144,8 @@ public class Tabla implements Table{
 
     @Override
     public RowCursor getRows(DataStructure type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //return Fila
+        return null;
     }
 
     @Override
@@ -155,4 +153,13 @@ public class Tabla implements Table{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public static void main(String[] args) {
+        // TODO code application logic here
+    ListaEnlazada Li=new ListaEnlazada();
+    
+    Li.append(1);
+    Li.append(2);
+    Li.append(3);
+
+    }
 }

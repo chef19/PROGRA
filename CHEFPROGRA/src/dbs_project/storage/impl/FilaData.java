@@ -14,29 +14,27 @@ import dbs_project.storage.RowMetaData;
  */
 public class FilaData implements RowMetaData{
     
-    public ListaEnlazada tabla;
-    public int ID;
+    public ListaEnlazada Fila;
     
     
-    public FilaData(int ID,ListaEnlazada tabla){
-        this.ID=ID;
-        this.tabla=tabla;
+    public FilaData(ListaEnlazada fila){
+        this.Fila=fila;
     }
 
     @Override
     public int getColumnCount() {
-        return tabla.size;
+        return Fila.size();
     }
 
     @Override
     public ColumnMetaData getColumnMetaData(int positionInTheRow) throws IndexOutOfBoundsException {
-        tabla.goToPos(positionInTheRow);
-        return (ColumnMetaData) tabla.getElement();
+        
+        return (ColumnMetaData) Fila.getElement();
     }
 
     @Override
     public int getId() {
-        return ID;
+        return Fila.getPosition();
     }
     
 }

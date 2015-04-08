@@ -18,21 +18,22 @@ import java.util.Date;
 public class Fila implements Row {
     public ListaEnlazada Fila;
     public int posicion;
+    public FilaData Datos;
 
-    public Fila(int posicion,ListaEnlazada Fila){
+    public Fila(ListaEnlazada Fila){
         this.Fila = Fila;    
-        this.posicion=posicion;
+        Datos= new FilaData(Fila);
     }
     
     @Override
     public RowMetaData getMetaData() {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      return Datos;
     }
 
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
-        Fila.goToPos(index);
-        return (int) Fila.getElement();
+            Fila.goToPos(index);
+            return (int) Fila.getElement();
         
     }
 
