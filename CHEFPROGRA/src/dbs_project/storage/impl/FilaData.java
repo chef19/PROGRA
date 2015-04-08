@@ -30,13 +30,13 @@ public class FilaData implements RowMetaData{
 
     @Override
     public ColumnMetaData getColumnMetaData(int positionInTheRow) throws IndexOutOfBoundsException {
-        ListaEnlazada Columna = (ListaEnlazada) tabla.getElement();
-        return null;
+        tabla.goToPos(positionInTheRow);
+        return (ColumnMetaData) tabla.getElement();
     }
 
     @Override
     public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ID;
     }
     
 }

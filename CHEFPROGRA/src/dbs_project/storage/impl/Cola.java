@@ -12,7 +12,7 @@ import dbs_project.structures.Queue;
  *
  * @author Kevin Matamoros
  */
-public class Cola implements Queue{
+public class Cola<T> implements Queue<T>{
 
     public Nodo front;
     public Nodo rear;
@@ -28,7 +28,7 @@ public class Cola implements Queue{
     }
     
     @Override
-    public void enqueue(Object element) {
+    public void enqueue(T element) {
         if (size==0){
             Nodo newN = new Nodo(element);
             front.setNext(newN);
@@ -39,7 +39,7 @@ public class Cola implements Queue{
     }
 
     @Override
-    public Object dequeue() {
+    public T dequeue() {
          if (size==0){
             System.out.println("Cola se encuentra vacia");
         }
@@ -48,18 +48,18 @@ public class Cola implements Queue{
             front=front.getNext();
             size--;
         }
-        return  front.getElemento();
+        return (T) front.getElemento();
     }
 
     @Override
-    public Object first() {
+    public T first() {
         if(front.getElemento()==null){
             System.out.println(front.getNext().getElemento());
         }
         else{
             System.out.println(front.getElemento());
         }
-        return front.getElemento();
+        return (T) front.getElemento();
     }
 
     @Override

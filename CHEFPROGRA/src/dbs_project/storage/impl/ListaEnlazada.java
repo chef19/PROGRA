@@ -8,12 +8,13 @@ package dbs_project.storage.impl;
 import dbs_project.storage.impl.Nodo;
 import dbs_project.structures.DataStructure;
 import dbs_project.structures.LinearList;
+import org.apache.commons.collections.primitives.IntIterator;
 
 /**
  *
  * @author max
  */
-public class ListaEnlazada implements LinearList {
+public class ListaEnlazada<T> implements LinearList<T> {
     public Nodo head;
     public Nodo current;
     public Nodo tail;
@@ -28,7 +29,7 @@ public class ListaEnlazada implements LinearList {
         position=-1;
     }
     
-    public void insert(Object element) {
+    public void insert(T element) {
         Nodo NuevoNodo = new Nodo(element, current.getNext());
         if (size==0){
             current=NuevoNodo;
@@ -43,7 +44,7 @@ public class ListaEnlazada implements LinearList {
     }
 
     @Override
-    public void append(Object element) {
+    public void append(T element) {
         Nodo NuevoNodo = new Nodo(element);
 	if (size == 0){
             tail=NuevoNodo;
@@ -78,8 +79,8 @@ public class ListaEnlazada implements LinearList {
     }
 
     @Override
-    public Object getElement() {
-        return current.getElemento();
+    public T getElement() {
+        return (T) current.getElemento();
     }
 
     @Override
@@ -139,7 +140,7 @@ public class ListaEnlazada implements LinearList {
     }
 
     @Override
-    public int getPositionOfElement(Object element) {
+    public int getPositionOfElement(T element) {
         Nodo temporal = head;
         int position= -1;
         while (temporal != null) {
@@ -176,5 +177,10 @@ public class ListaEnlazada implements LinearList {
         }
         return false;
     }
-    
+
+    void goToPos(IntIterator rowIDs) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
 }

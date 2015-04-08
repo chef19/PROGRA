@@ -24,11 +24,24 @@ import org.apache.commons.collections.primitives.IntIterator;
  * @author Kevin Matamoros
  */
 public class Tabla implements Table{
-    public Tabla(){}
+    ListaEnlazada Tabl;
+    ListaEnlazada Fil;
     
+    FilaCursor FilCursor;
+    
+    public Row Fila;
+    public int FilaID;
+    
+    
+    public Tabla(Row fila){
+        this.Fila=fila;
+        
+        
+        
+    }
     @Override
     public void renameColumn(int columnId, String newColumnName) throws ColumnAlreadyExistsException, NoSuchColumnException {
-
+        
     }
 
     @Override
@@ -38,12 +51,18 @@ public class Tabla implements Table{
 
     @Override
     public int addRow(Row row) throws SchemaMismatchException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Fil = new ListaEnlazada();
+        
+        Fil.insert(row);
+        this.FilaID=FilaID+1;
+        FilCursor=new FilaCursor(FilaID,Fil);
+        
+        return FilaID;
     }
 
     @Override
     public IntIterator addRows(RowCursor rows) throws SchemaMismatchException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -58,12 +77,17 @@ public class Tabla implements Table{
 
     @Override
     public void deleteRow(int rowID) throws NoSuchRowException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Fil.goToPos(rowID);
+        Fil.remove();
     }
 
     @Override
     public void deleteRows(IntIterator rowIDs) throws NoSuchRowException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        while(rowIDs.hasNext()==true){
+            Fil.goToPos(rowIDs);
+            Fil.remove();
+            rowIDs.next();
+        }
     }
 
     @Override

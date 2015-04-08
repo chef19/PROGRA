@@ -10,67 +10,69 @@ import dbs_project.storage.RowMetaData;
 import dbs_project.structures.DataStructure;
 import dbs_project.structures.LinearDataStructure;
 import java.util.Date;
+import org.apache.commons.collections.primitives.IntIterator;
 
 /**
  *
  * @author Kevin Matamoros
  */
 public class FilaCursor implements RowCursor{
-    public ListaEnlazada tabla;
-    public int posicion;
+    public ListaEnlazada fila;
+    public int ID;
+    public IntIterator elementos;
     
     
-    public FilaCursor(int posicion,ListaEnlazada Tabla){
-        this.posicion=posicion;
-        this.tabla=Tabla;
+    public FilaCursor(int ID,ListaEnlazada Fila){
+        this.ID=ID;
+        this.fila=Fila;
+        this.elementos=elementos;
         
     }
     @Override
     public RowMetaData getMetaData() {
-
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
-         tabla.goToPos(index);
-         return (int) tabla.getElement();
+         fila.goToPos(index);
+         return (int) fila.getElement();
     }
 
     @Override
     public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
-        tabla.goToPos(index);
-        return (boolean) tabla.getElement();
+        fila.goToPos(index);
+        return (boolean) fila.getElement();
     }
 
     @Override
     public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
-        tabla.goToPos(index);
-        return (double) tabla.getElement();
+        fila.goToPos(index);
+        return (double) fila.getElement();
     }
 
     @Override
     public Date getDate(int index) throws IndexOutOfBoundsException, ClassCastException {
-        tabla.goToPos(index);
-        return (Date) tabla.getElement();
+        fila.goToPos(index);
+        return (Date) fila.getElement();
     }
 
     @Override
     public String getString(int index) throws IndexOutOfBoundsException {
-        tabla.goToPos(index);
-        return (String) tabla.getElement();
+        fila.goToPos(index);
+        return (String) fila.getElement();
     }
 
     @Override
     public Object getObject(int index) throws IndexOutOfBoundsException {
-        tabla.goToPos(index);
-        return (Object) tabla.getElement();
+        fila.goToPos(index);
+        return (Object) fila.getElement();
     }
 
     @Override
     public boolean isNull(int index) throws IndexOutOfBoundsException {
-        tabla.goToPos(index);
-        if(tabla.getElement()==null){
+        fila.goToPos(index);
+        if(fila.getElement()==null){
             return true;
         }
         else{
@@ -86,12 +88,12 @@ public class FilaCursor implements RowCursor{
 
     @Override
     public boolean next() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return elementos.hasNext();
     }
 
     @Override
     public int getCursorPosition() {
-        return this.posicion;
+        return this.ID;
     }
 
     @Override
@@ -103,5 +105,17 @@ public class FilaCursor implements RowCursor{
     public DataStructure getType() {
         return DataStructure.DOUBLYLINKEDLIST;
     }
+    public static void main(String[] args) {
+        // TODO code application logic here
+    ListaEnlazada asdf= new ListaEnlazada();
+    asdf.append(1);
+    asdf.append(2);
+    asdf.append(3);
+    asdf.append(4);
+    asdf.append(5);
+    FilaCursor F = new FilaCursor(2,asdf);
+    System.out.println(F.getInteger(3));
+    }
+    
     
 }

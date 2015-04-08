@@ -12,7 +12,7 @@ import dbs_project.structures.Stack;
  *
  * @author max
  */
-public class Pila implements Stack{
+public class Pila<T> implements Stack<T>{
     public Nodo top;
     public int size;
     
@@ -22,14 +22,14 @@ public class Pila implements Stack{
     }
     
     @Override
-    public void push(Object element) {
+    public void push(T element) {
         top=new Nodo(element,top);
         size++;
         System.out.println(element);
     }
 
     @Override
-    public Object pop() {
+    public T pop() {
         if(top==null || size==0){
             System.out.println("Pila vacia");
         }
@@ -37,18 +37,18 @@ public class Pila implements Stack{
         top=top.getNext();
         size--;
         System.out.println(retornar);
-        return retornar;    
+        return (T) retornar;    
     }
 
     @Override
-    public Object top() {
+    public T top() {
         if(size==0){
             System.out.println("Pila vacia");
             return null;
         }
         else{
             System.out.println(top.getElemento());
-            return top.getElemento();
+            return (T) top.getElemento();
         }    
     }
 
