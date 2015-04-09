@@ -14,7 +14,7 @@ import org.apache.commons.collections.primitives.IntIterator;
 
 /**
  *
- * @author Kevin Matamoros
+ *@author Kevin Matamoros
  */
 public class FilaCursor implements RowCursor{
     public  Fila fila;
@@ -71,12 +71,7 @@ public class FilaCursor implements RowCursor{
     @Override
     public boolean isNull(int index) throws IndexOutOfBoundsException {
         fila=(Fila) Filas.current.getElemento();
-        if(fila.isNull(index)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return fila.isNull(index);
         
     }
 
@@ -104,18 +99,56 @@ public class FilaCursor implements RowCursor{
     public DataStructure getType() {
         return DataStructure.LINKEDLIST;
     }
+    
+    
     public static void main(String[] args) {
         // TODO code application logic here
-    ListaEnlazada asdf= new ListaEnlazada();
-    asdf.append(1);
-    asdf.append(2);
-    asdf.append(3);
-    asdf.append(4);
-    asdf.append("Hola");
-    FilaCursor F = new FilaCursor(asdf);
-    System.out.println(F.getString(4));
-    System.out.println(F.getCursorPosition());
+    ListaEnlazada Lista1= new ListaEnlazada();
+    ListaEnlazada Lista2= new ListaEnlazada();
+    ListaEnlazada Lista3= new ListaEnlazada();
     
+    Lista1.append(1);
+    Lista1.append(2);
+    
+    Lista2.append(3);
+    Lista2.append(4);
+    Lista2.append(5);
+    Lista2.append(6);
+    
+    Lista3.append(6);
+    
+    Fila Fila1=new Fila(Lista1);
+    Fila Fila2=new Fila(Lista2);
+    Fila Fila3=new Fila(Lista3);
+    
+    ListaEnlazada Filas= new ListaEnlazada();
+    Filas.append(Fila1);
+    Filas.append(Fila2);
+    Filas.append(Fila3);
+    
+    FilaCursor Cursor = new FilaCursor(Filas);
+    
+    
+    System.out.println("Posicion: "+Cursor.getCursorPosition());
+    System.out.println("Valor: "+Cursor.getInteger(1));
+    System.out.println("Columnas de Fila: "+Cursor.getMetaData().getColumnCount());
+    System.out.println("ID Fila: "+Cursor.getMetaData().getId());
+    System.out.println("");
+    
+    Cursor.next();
+    System.out.println("Posicion: "+Cursor.getCursorPosition());
+    System.out.println("Valor: "+Cursor.getInteger(1));
+    System.out.println("Columnas de Fila: "+Cursor.getMetaData().getColumnCount());
+    System.out.println("ID Fila: "+Cursor.getMetaData().getId());
+    System.out.println("");
+    
+    Cursor.next();
+    System.out.println("Posicion: "+Cursor.getCursorPosition());
+    System.out.println("Valor: "+Cursor.getInteger(0));
+    System.out.println("Columnas de Fila: "+Cursor.getMetaData().getColumnCount());
+    System.out.println("ID Fila: "+Cursor.getMetaData().getId());
+    
+
     }
     
     

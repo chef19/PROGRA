@@ -15,10 +15,12 @@ import dbs_project.storage.RowMetaData;
 public class FilaData implements RowMetaData{
     
     public ListaEnlazada Fila;
+    public int ID;
     
     
-    public FilaData(ListaEnlazada fila){
-        this.Fila=fila;
+    public FilaData(ListaEnlazada Fila,int ID){
+        this.ID=ID;
+        this.Fila=Fila;
     }
 
     @Override
@@ -34,7 +36,7 @@ public class FilaData implements RowMetaData{
 
     @Override
     public int getId() {
-        return Fila.getPosition();
+        return ID;
     }
     
 }

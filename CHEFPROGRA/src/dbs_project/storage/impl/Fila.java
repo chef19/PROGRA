@@ -17,13 +17,19 @@ import java.util.Date;
  */
 public class Fila implements Row {
     public ListaEnlazada Fila;
-    public int posicion;
+    public static int ID=0;
     public FilaData Datos;
 
     public Fila(ListaEnlazada Fila){
         this.Fila = Fila;    
-        Datos= new FilaData(Fila);
+        Datos= new FilaData(Fila,ID);
+        ID++;
     }
+    public Fila(ListaEnlazada Fila,int ID){
+        this.Fila = Fila;    
+        Datos= new FilaData(Fila,ID);
+    }
+    
     
     @Override
     public RowMetaData getMetaData() {
@@ -82,5 +88,9 @@ public class Fila implements Row {
     public LinearDataStructure<?> asLinearDataStructure(DataStructure type) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
+    
+    
     
 }

@@ -14,9 +14,9 @@ import dbs_project.structures.LinearList;
  */
 public class ListaDobleEnlazada<T> implements LinearList<T> {
 
-    public Nodo head;
-    public Nodo current;
-    public Nodo tail;
+    public NodoD head;
+    public NodoD current;
+    public NodoD tail;
     public int position;
     public int size;
     
@@ -29,13 +29,15 @@ public class ListaDobleEnlazada<T> implements LinearList<T> {
     }
     @Override
     public void insert(T element) {
-        Nodo NuevoNodo = new Nodo(element, current.getNext());
+        NodoD NuevoNodo = new NodoD(element, current.getNext());
         if (size==0){
             current=NuevoNodo;
             tail=NuevoNodo;
             head=NuevoNodo;
         }
+        NodoD temp=current;
         current.setNext(NuevoNodo);
+        current.setAfter(temp);
         if(current==tail){
             tail=tail.getNext();
         }
@@ -44,7 +46,7 @@ public class ListaDobleEnlazada<T> implements LinearList<T> {
 
     @Override
     public void append(T element) {
-        Nodo NuevoNodo = new Nodo(element);
+        NodoD NuevoNodo = new NodoD(element);
 	if (size == 0){
             tail=NuevoNodo;
             head=NuevoNodo;
@@ -64,7 +66,7 @@ public class ListaDobleEnlazada<T> implements LinearList<T> {
             System.out.println("Lista vacía");
             return;
         }
-        Nodo temporal = current;
+        NodoD temporal = current;
 	previous();
 	if (temporal == tail) {
             current.setNext(null);
@@ -97,13 +99,8 @@ public class ListaDobleEnlazada<T> implements LinearList<T> {
         if (current == head) {
             return false;
 	}
-	Nodo temporal = head;
-	position = -1;
-	while (temporal.getNext() != current) {
-            temporal = temporal.getNext();
-            position++;
-	}
-	current = temporal;
+	current=current.getAfter();
+        position--;
         return true;
     }
 
@@ -140,7 +137,7 @@ public class ListaDobleEnlazada<T> implements LinearList<T> {
 
     @Override
     public int getPositionOfElement(T element) {
-        Nodo temporal = head;
+        NodoD temporal = head;
         int position= -1;
         while (temporal != null) {
             if (temporal.getElemento() != null && temporal.getElemento().equals(element)){
@@ -164,7 +161,7 @@ public class ListaDobleEnlazada<T> implements LinearList<T> {
 
     @Override
     public void clear() {
-        this.head = this.tail = this.current = new Nodo();
+        this.head = this.tail = this.current = new NodoD();
         this.position = -1;
         this.size = 0;    
     }
