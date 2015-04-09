@@ -18,11 +18,13 @@ import java.util.Date;
  */
 public class Columna implements Column{
     public ListaEnlazada Columna;
+    public static int ID=0;
+    public String Name;
     public ColumnData Datos;
     
-    public Columna(ListaEnlazada Columna){
+    public Columna(ListaEnlazada Columna, String Name){
         this.Columna = Columna;
-        Datos=new ColumnData(Columna);
+        Datos=new ColumnData(Columna, ID, Name);
     }
     
     public ColumnMetaData getMetaData() {

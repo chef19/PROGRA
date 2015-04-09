@@ -15,9 +15,29 @@ import dbs_project.storage.Type;
  */
 public class ColumnData implements ColumnMetaData{
     public ListaEnlazada Columna;
+    public String Name;
+    public Tabla Tabla;
+    public int ID;
+    public FilaCursor Cursor;
     
-    public ColumnData(ListaEnlazada Columna){
+    public ColumnData(ListaEnlazada Columna, int ID, String Name, Tabla Tabla){
         this.Columna = Columna;
+        this.ID = ID;
+        this.Name = Name;
+        this.Tabla = Tabla;
+    }
+    
+    public ColumnData(ListaEnlazada Columna, int ID, String Name){
+        this.Columna = Columna;
+        this.ID = ID;
+        this.Name = Name;
+    }
+    
+    public ColumnData(ListaEnlazada Columna, int ID, String Name, FilaCursor Cursor){
+        this.Columna = Columna;
+        this.ID = ID;
+        this.Name = Name;
+        this.Cursor = Cursor;
     }
     
     @Override
@@ -27,12 +47,12 @@ public class ColumnData implements ColumnMetaData{
 
     @Override
     public Table getSourceTable() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Tabla;
     }
 
     @Override
     public String getLabel() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Tabla.getTableMetaData().getName()+"."+Name;
     }
 
     @Override
@@ -42,16 +62,20 @@ public class ColumnData implements ColumnMetaData{
 
     @Override
     public int getRowId(int positionInColumn) throws IndexOutOfBoundsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int i;
+        for(i=0;i==positionInColumn;i++){
+            Cursor.next();
+        }
+        return Cursor.getMetaData().getId();
     }
 
     @Override
     public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ID;
     }
 
     @Override
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Name;
     }
 }
