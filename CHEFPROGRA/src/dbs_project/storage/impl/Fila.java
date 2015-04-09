@@ -25,8 +25,7 @@ public class Fila implements Row {
         Datos= new FilaData(Fila,ID);
         ID++;
     }
-    public Fila(ListaEnlazada Fila,int ID){
-        this.Fila = Fila;    
+    public Fila(Fila Fila,int ID){
         Datos= new FilaData(Fila,ID);
     }
     

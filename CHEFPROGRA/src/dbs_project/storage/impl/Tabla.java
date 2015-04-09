@@ -24,7 +24,7 @@ import org.apache.commons.collections.primitives.IntIterator;
  * @author Kevin Matamoros
  */
 public class Tabla implements Table{
-    ListaEnlazada Fil;
+    static ListaEnlazada Fil;
     
     FilaCursor FilCursor;
     
@@ -32,6 +32,7 @@ public class Tabla implements Table{
     
     
     public Tabla(){
+        Fil = new ListaEnlazada();
     }
     public Tabla(Row fila){
 
@@ -52,9 +53,8 @@ public class Tabla implements Table{
 
     @Override
     public int addRow(Row row) throws SchemaMismatchException {
-        Fil = new ListaEnlazada();
         Fil.append(row);
-        return Fil.size()-1;
+        return row.getMetaData().getId();
     }
 
     @Override
@@ -81,7 +81,6 @@ public class Tabla implements Table{
     @Override
     public void deleteRows(IntIterator rowIDs) throws NoSuchRowException {
         while(rowIDs.hasNext()==true){
-            Fil.goToPos(rowIDs);
             Fil.remove();
             rowIDs.next();
         }
@@ -114,12 +113,16 @@ public class Tabla implements Table{
 
     @Override
     public Row getRow(int rowId) throws NoSuchRowException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Fil.goToPos(rowId);
+        return (Fila) Fil.getElement();
     }
 
     @Override
     public void updateRow(int rowID, Row newRow) throws SchemaMismatchException, NoSuchRowException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(rowID>Fil.size()){
+            
+        }
+        
     }
 
     @Override
@@ -153,13 +156,42 @@ public class Tabla implements Table{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SchemaMismatchException, NoSuchRowException {
         // TODO code application logic here
-    ListaEnlazada Li=new ListaEnlazada();
+    ListaEnlazada Lista1= new ListaEnlazada();
+    ListaEnlazada Lista2= new ListaEnlazada();
+    ListaEnlazada Lista3= new ListaEnlazada();
+    //*********************
+    Lista1.append(1);
+    Lista1.append(2);
+    //*********************
+    Lista2.append(3);
+    Lista2.append(4);
+    Lista2.append(5);
+    Lista2.append(6);
+    //*********************
+    Lista3.append(7);
+    //*********************
+    Tabla tabla=new Tabla();
+    //*********************
+    Fila Fila1 =new Fila(Lista1);
+    Fila Fila2 =new Fila(Lista2);
+    Fila Fila3 =new Fila(Lista3);
+    //*********************
+    System.out.println("Añade Fila3");
+    System.out.println(tabla.addRow(Fila3));
     
-    Li.append(1);
-    Li.append(2);
-    Li.append(3);
-
+    System.out.println("Añade Fila1");
+    System.out.println(tabla.addRow(Fila1));
+    
+    System.out.println("Añade Fila2");
+    System.out.println(tabla.addRow(Fila2));
+    //*********************
+    System.out.println("Cantidad de Filas");
+    System.out.println(Fil.size());
+    //*********************
+    System.out.println("ObtenerFila");
+    System.out.println(tabla.getRow(0));
+    
     }
 }

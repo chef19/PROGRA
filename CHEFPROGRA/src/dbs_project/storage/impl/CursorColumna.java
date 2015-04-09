@@ -19,11 +19,13 @@ import java.util.Date;
 public class CursorColumna implements ColumnCursor{
 
     public ListaEnlazada Columnas;
+    public ListaEnlazada ColumnasFinal;
     public Columna Columna;
     
     public CursorColumna(ListaEnlazada Columnas){
         this.Columnas = Columnas;
         this.Columna=null;
+        this.ColumnasFinal = new ListaEnlazada();
     }
     
     @Override
@@ -92,7 +94,8 @@ public class CursorColumna implements ColumnCursor{
 
     @Override
     public void close() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ColumnasFinal.append(Columnas.current.getElemento());
+        Columnas = ColumnasFinal;
     }
 
     @Override

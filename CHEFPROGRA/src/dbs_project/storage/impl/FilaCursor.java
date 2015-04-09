@@ -14,16 +14,18 @@ import org.apache.commons.collections.primitives.IntIterator;
 
 /**
  *
- *@author Kevin Matamoros
+ * @author Kevin Matamoros
  */
 public class FilaCursor implements RowCursor{
     public  Fila fila;
     public ListaEnlazada Filas;
+    public ListaEnlazada FilaFinal;
     
     
     public FilaCursor(ListaEnlazada Filas){
         this.fila=null;
         this.Filas=Filas;
+        FilaFinal=new ListaEnlazada();
         
     }
     @Override
@@ -92,7 +94,9 @@ public class FilaCursor implements RowCursor{
 
     @Override
     public void close() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FilaFinal.append(Filas.current.getElemento());
+        Filas= FilaFinal;
+        
     }
 
     @Override
@@ -141,12 +145,9 @@ public class FilaCursor implements RowCursor{
     System.out.println("Columnas de Fila: "+Cursor.getMetaData().getColumnCount());
     System.out.println("ID Fila: "+Cursor.getMetaData().getId());
     System.out.println("");
+    Cursor.close();
     
-    Cursor.next();
-    System.out.println("Posicion: "+Cursor.getCursorPosition());
-    System.out.println("Valor: "+Cursor.getInteger(0));
-    System.out.println("Columnas de Fila: "+Cursor.getMetaData().getColumnCount());
-    System.out.println("ID Fila: "+Cursor.getMetaData().getId());
+   System.out.println(Cursor.next());
     
 
     }
