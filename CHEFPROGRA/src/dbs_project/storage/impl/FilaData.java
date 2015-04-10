@@ -31,12 +31,7 @@ public class FilaData implements RowMetaData{
 
     @Override
     public int getColumnCount() {
-        if(Fila==null){
-            return FilaRealizada.Fila.size();
-        }
-        else{
-            return Fila.size();
-        }
+            return Fila.size();        
     }
 
     @Override
