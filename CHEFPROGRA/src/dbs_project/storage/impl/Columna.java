@@ -5,7 +5,7 @@
  */
 package dbs_project.storage.impl;
 
-import com.sun.org.apache.bcel.internal.generic.Type;
+import dbs_project.storage.Type;
 import dbs_project.storage.Column;
 import dbs_project.storage.ColumnMetaData;
 import dbs_project.structures.DataStructure;
@@ -18,13 +18,13 @@ import java.util.Date;
  */
 public class Columna implements Column{
     public ListaEnlazada Columna;
-    public static int ID=0;
-    public String Name;
     public ColumnData Datos;
+    public Type DataType;
+    public static int ID;
     
-    public Columna(ListaEnlazada Columna, String Name){
+    public Columna(ListaEnlazada Columna, String Name, Type DataType){
         this.Columna = Columna;
-        Datos=new ColumnData(Columna, ID, Name);
+        Datos=new ColumnData(Columna, ID, Name, DataType);
     }
     
     public ColumnMetaData getMetaData() {
@@ -91,6 +91,7 @@ public class Columna implements Column{
     public LinearDataStructure<?> asLinearDataStructure(DataStructure type) {
         Pila NuevaPila= new Pila();
         Cola NuevaCola= new Cola();
+        ListaDobleEnlazada NuevaLista= new ListaDobleEnlazada();
         int i=0;
         if (type==DataStructure.STACK){
             while(i>Columna.size){
@@ -112,7 +113,12 @@ public class Columna implements Column{
             return Columna;
         }
         else if (type==DataStructure.DOUBLYLINKEDLIST){
-        
+            while(i>Columna.size){
+                NuevaLista.append(Columna.current);
+                Columna.next();
+                i++;
+            }
+            return NuevaLista;
         }
         return null;
     }

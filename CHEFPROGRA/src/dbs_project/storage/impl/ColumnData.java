@@ -16,6 +16,7 @@ import dbs_project.storage.Type;
 public class ColumnData implements ColumnMetaData{
     public ListaEnlazada Columna;
     public String Name;
+    public Type DataType;
     public Tabla Tabla;
     public int ID;
     public FilaCursor Cursor;
@@ -27,10 +28,11 @@ public class ColumnData implements ColumnMetaData{
         this.Tabla = Tabla;
     }
     
-    public ColumnData(ListaEnlazada Columna, int ID, String Name){
+    public ColumnData(ListaEnlazada Columna, int ID, String Name, Type DataType){
         this.Columna = Columna;
         this.ID = ID;
         this.Name = Name;
+        this.DataType = DataType;
     }
     
     public ColumnData(ListaEnlazada Columna, int ID, String Name, FilaCursor Cursor){

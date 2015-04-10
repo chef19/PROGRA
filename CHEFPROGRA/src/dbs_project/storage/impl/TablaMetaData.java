@@ -15,6 +15,14 @@ import java.util.Map;
  */
 public class TablaMetaData implements TableMetaData{
 
+    public int ID;
+    public String Name;
+    
+    public TablaMetaData(int ID, String Name){
+        this.ID = ID;
+        this.Name = Name;
+    }
+    
     @Override
     public Map<String, ColumnMetaData> getTableSchema() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -27,12 +35,12 @@ public class TablaMetaData implements TableMetaData{
 
     @Override
     public int getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return ID;
     }
 
     @Override
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Name;
     }
     
 }

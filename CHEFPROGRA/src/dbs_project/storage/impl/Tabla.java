@@ -25,7 +25,8 @@ import org.apache.commons.collections.primitives.IntIterator;
  */
 public class Tabla implements Table{
     static ListaEnlazada Fil;
-    
+    CursorColumna ColumnaCursor;
+    static ListaEnlazada Columnas;
     FilaCursor FilCursor;
     
     public Row Fila;
@@ -48,7 +49,9 @@ public class Tabla implements Table{
 
     @Override
     public int createColumn(String columnName, Type columnType) throws ColumnAlreadyExistsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ListaEnlazada Lista = new ListaEnlazada();
+        Columna Columna = new Columna(Lista, columnName, columnType);
+        return(Columna.Datos.getId());
     }
 
     @Override
@@ -98,7 +101,19 @@ public class Tabla implements Table{
 
     @Override
     public Column getColumn(int columnId) throws NoSuchColumnException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ColumnaCursor = new CursorColumna(Columnas);
+        Columna Columna;
+        int i=0;
+        while(i<=ColumnaCursor.Columnas.size()){
+            Columna= (Columna) ColumnaCursor.Columnas.current.getElemento();
+            if (Columna.getMetaData().getId()==columnId){
+                return Columna;
+            }
+            else{
+                ColumnaCursor.next();
+                i++;
+            }
+        }
     }
 
     @Override
@@ -141,7 +156,20 @@ public class Tabla implements Table{
 
     @Override
     public void updateColumn(int columnId, Column updateColumn) throws SchemaMismatchException, NoSuchColumnException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ColumnaCursor = new CursorColumna(Columnas);
+        Columna Columna;
+        int i=0;
+        while(i<=ColumnaCursor.Columnas.size()){
+            Columna= (Columna) ColumnaCursor.Columnas.current.getElemento();
+            if (Columna.getMetaData().getId()==columnId){
+                ColumnaCursor.Columnas.current.setElemento(updateColumn);
+                return;
+            }
+            else{
+                ColumnaCursor.next();
+                i++;
+            }
+        }
     }
 
     @Override
