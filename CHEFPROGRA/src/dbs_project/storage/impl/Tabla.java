@@ -114,28 +114,28 @@ public class Tabla implements Table{
 
     @Override
     public Row getRow(int rowId) throws NoSuchRowException {
-        return null;
-        /**FilCursor = new FilaCursor(Fil);
-        while(FilCursor.Filas.current.getElemento()!=rowId){
-            int contador = FilCursor.getMetaData().getColumnCount();
-            if(contador>=0){
-                FilCursor.next();
-                contador--;
+        FilCursor = new FilaCursor(Fil);
+        /**Fila Fila = null;
+        for(int i=0;i==FilCursor.Filas.size();i++){
+            Fila = (Fila) FilCursor.Filas.current.getElemento();
+            while(Fila.getMetaData().getId()!=rowId){
+                FilCursor.Filas.next();
             }
         }
-        return (Fila) FilCursor.Filas.current.getElemento();
-        **/
+        return (Fila) Fila;**/
+        for(int i=0;FilCursor.getMetaData().getId()==rowId;i++){
+            if(i==FilCursor.Filas.size()){
+                return null;
+            }
+            FilCursor.next();
+        }
+        return (Row) FilCursor.Filas.current.getElemento();
     }
 
     @Override
     public void updateRow(int rowID,Row newRow) throws SchemaMismatchException, NoSuchRowException {
-        if(rowID>Fil.size()){
-            Fila = new Fila((Fila) newRow,rowID);
-            Fil.append(Fila);
-        }
-        else{
-                        
-        }
+        Fil.goToPos(rowID);
+        
     }
     @Override
     public void updateRows(IntIterator rowIDs, RowCursor newRows) throws SchemaMismatchException, NoSuchRowException {
@@ -190,6 +190,15 @@ public class Tabla implements Table{
         }
         return null;
     }
+    public int getRow1(int rowId) throws NoSuchRowException {
+        FilCursor = new FilaCursor(Fil);
+        for(int i=0;FilCursor.getMetaData().getId()==rowId;i++){
+            if(i==FilCursor.Filas.size()){
+            }
+            FilCursor.next();
+        }
+        return (int) FilCursor.getMetaData().getId();
+    }
     
     public static void main(String[] args) throws SchemaMismatchException, NoSuchRowException {
         // TODO code application logic here
@@ -197,6 +206,7 @@ public class Tabla implements Table{
     ListaEnlazada Lista2= new ListaEnlazada();
     ListaEnlazada Lista3= new ListaEnlazada();
     ListaEnlazada Lista4= new ListaEnlazada();
+    ListaEnlazada FilasD= new ListaEnlazada();
     //*********************
     Lista1.append(1);
     Lista1.append(2);
@@ -218,6 +228,10 @@ public class Tabla implements Table{
     Fila Fila2 =new Fila(Lista2);
     Fila Fila3 =new Fila(Lista3);
     Fila Fila4 =new Fila(Lista4);
+    FilasD.append(Fila1);
+    FilasD.append(Fila2);
+    FilasD.append(Fila3);
+    FilasD.append(Fila4);
     //*********************
     System.out.println("Añade Fila3");
     System.out.println(tabla.addRow(Fila3));
@@ -227,19 +241,24 @@ public class Tabla implements Table{
     
     System.out.println("Añade Fila2");
     System.out.println(tabla.addRow(Fila2));
+    
+    System.out.println("Añade Fila4");
+    System.out.println(tabla.addRow(Fila4));
     //*********************
     System.out.println("Cantidad de Filas");
     System.out.println(Fil.size());
     //*********************
-    System.out.println("ObtenerFila");
-    System.out.println(tabla.getRow(1));
-    //*********************
-    System.out.println("ActualizarFila");
-    tabla.updateRow(4,Fila4);
-    System.out.println("ACTUALIZO!!");
-    System.out.println(tabla.getRow(4));
+    FilaCursor Cursor = new FilaCursor(Fil);
+    System.out.println("Posicion Cursor");
+    System.out.println(Cursor.getCursorPosition());
+    System.out.println(Cursor.getMetaData().getId());
     
-    //*
+    
+    Cursor.next();
+    System.out.println(Cursor.Filas.current.getElemento());
+    System.out.println("Busq ID2  "+tabla.getRow(1));
+    System.out.println("ID"+tabla.getRow1(2));
+    //*********************
     }
-    //list=new TintArrayList();
 }
+ 

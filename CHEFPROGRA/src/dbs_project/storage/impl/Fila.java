@@ -25,11 +25,7 @@ public class Fila implements Row {
         Datos= new FilaData(Fila,ID);
         ID++;
     }
-    public Fila(Fila Fila,int ID){
-        int NuevoI= Fila.getMetaData().getId();
-        NuevoI=ID;
-    }
-    
+
     
     @Override
     public RowMetaData getMetaData() {

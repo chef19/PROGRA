@@ -6,7 +6,7 @@ import dbs_project.structures.LinearDataStructure;
  * This interface represents a Linked List or Doubly Linked List data structure
  *  (as seen in class). All the methods are the same for both types. 
  * 
- * @author  Isaac Alpízar Chacón
+ * @author  Isaac Alpzar Chacn
  *
  * @param <T>
  */

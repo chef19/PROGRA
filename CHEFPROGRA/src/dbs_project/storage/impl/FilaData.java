@@ -14,9 +14,10 @@ import dbs_project.storage.RowMetaData;
  */
 public class FilaData implements RowMetaData{
     
-    public ListaEnlazada Fila;
-    public Fila FilaRealizada;
+    public ListaEnlazada Fila=null;
+    public Fila FilaRealizada=null;
     public int ID;
+    public int NuevoI;
     
     
     public FilaData(ListaEnlazada Fila,int ID){
@@ -24,12 +25,18 @@ public class FilaData implements RowMetaData{
         this.Fila=Fila;
     }
     public FilaData(Fila Fila,int ID){
-        this.FilaRealizada=Fila;
+        FilaRealizada=Fila;
+        this.NuevoI=ID;
     }
 
     @Override
     public int getColumnCount() {
-        return Fila.size();
+        if(Fila==null){
+            return FilaRealizada.Fila.size();
+        }
+        else{
+            return Fila.size();
+        }
     }
 
     @Override
@@ -40,7 +47,7 @@ public class FilaData implements RowMetaData{
 
     @Override
     public int getId() {
-        return ID;
+            return ID;
     }
     
 }
