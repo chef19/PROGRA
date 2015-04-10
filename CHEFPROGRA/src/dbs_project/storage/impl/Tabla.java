@@ -115,14 +115,6 @@ public class Tabla implements Table{
     @Override
     public Row getRow(int rowId) throws NoSuchRowException {
         FilCursor = new FilaCursor(Fil);
-        /**Fila Fila = null;
-        for(int i=0;i==FilCursor.Filas.size();i++){
-            Fila = (Fila) FilCursor.Filas.current.getElemento();
-            while(Fila.getMetaData().getId()!=rowId){
-                FilCursor.Filas.next();
-            }
-        }
-        return (Fila) Fila;**/
         for(int i=0;FilCursor.getMetaData().getId()==rowId;i++){
             if(i==FilCursor.Filas.size()){
                 return null;
@@ -190,16 +182,6 @@ public class Tabla implements Table{
         }
         return null;
     }
-    public int getRow1(int rowId) throws NoSuchRowException {
-        FilCursor = new FilaCursor(Fil);
-        for(int i=0;FilCursor.getMetaData().getId()==rowId;i++){
-            if(i==FilCursor.Filas.size()){
-            }
-            FilCursor.next();
-        }
-        return (int) FilCursor.getMetaData().getId();
-    }
-    
     public static void main(String[] args) throws SchemaMismatchException, NoSuchRowException {
         // TODO code application logic here
     ListaEnlazada Lista1= new ListaEnlazada();
@@ -257,7 +239,6 @@ public class Tabla implements Table{
     Cursor.next();
     System.out.println(Cursor.Filas.current.getElemento());
     System.out.println("Busq ID2  "+tabla.getRow(1));
-    System.out.println("ID"+tabla.getRow1(2));
     //*********************
     }
 }
