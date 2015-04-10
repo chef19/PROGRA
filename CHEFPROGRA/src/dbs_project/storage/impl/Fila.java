@@ -26,7 +26,8 @@ public class Fila implements Row {
         ID++;
     }
     public Fila(Fila Fila,int ID){
-        Datos= new FilaData(Fila,ID);
+        int NuevoI= Fila.getMetaData().getId();
+        NuevoI=ID;
     }
     
     

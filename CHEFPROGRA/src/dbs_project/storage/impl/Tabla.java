@@ -29,7 +29,7 @@ public class Tabla implements Table{
     FilaCursor FilCursor;
     
     public Row Fila;
-    
+        
     
     public Tabla(){
         Fil = new ListaEnlazada();
@@ -108,23 +108,35 @@ public class Tabla implements Table{
 
     @Override
     public RowCursor getRows(DataStructure type, IntIterator rowIds) throws NoSuchRowException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FilCursor = new FilaCursor(Fil);
+        return FilCursor;
     }
 
     @Override
     public Row getRow(int rowId) throws NoSuchRowException {
-        Fil.goToPos(rowId);
-        return (Fila) Fil.getElement();
+        return null;
+        /**FilCursor = new FilaCursor(Fil);
+        while(FilCursor.Filas.current.getElemento()!=rowId){
+            int contador = FilCursor.getMetaData().getColumnCount();
+            if(contador>=0){
+                FilCursor.next();
+                contador--;
+            }
+        }
+        return (Fila) FilCursor.Filas.current.getElemento();
+        **/
     }
 
     @Override
-    public void updateRow(int rowID, Row newRow) throws SchemaMismatchException, NoSuchRowException {
+    public void updateRow(int rowID,Row newRow) throws SchemaMismatchException, NoSuchRowException {
         if(rowID>Fil.size()){
-            
+            Fila = new Fila((Fila) newRow,rowID);
+            Fil.append(Fila);
         }
-        
+        else{
+                        
+        }
     }
-
     @Override
     public void updateRows(IntIterator rowIDs, RowCursor newRows) throws SchemaMismatchException, NoSuchRowException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -147,13 +159,36 @@ public class Tabla implements Table{
 
     @Override
     public RowCursor getRows(DataStructure type) {
-        //return Fila
+        if(type==DataStructure.DOUBLYLINKEDLIST){
+            return null;
+        }
+        if(type==DataStructure.LINKEDLIST){
+            return null;
+        }
+        if(type==DataStructure.QUEUE){
+            return null;
+        }
+        if(type==DataStructure.STACK){
+            return null;
+        }
         return null;
     }
 
     @Override
     public ColumnCursor getColumns(DataStructure type) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(type==DataStructure.DOUBLYLINKEDLIST){
+            return null;
+        }
+        if(type==DataStructure.LINKEDLIST){
+            return null;
+        }
+        if(type==DataStructure.QUEUE){
+            return null;
+        }
+        if(type==DataStructure.STACK){
+            return null;
+        }
+        return null;
     }
     
     public static void main(String[] args) throws SchemaMismatchException, NoSuchRowException {
@@ -161,6 +196,7 @@ public class Tabla implements Table{
     ListaEnlazada Lista1= new ListaEnlazada();
     ListaEnlazada Lista2= new ListaEnlazada();
     ListaEnlazada Lista3= new ListaEnlazada();
+    ListaEnlazada Lista4= new ListaEnlazada();
     //*********************
     Lista1.append(1);
     Lista1.append(2);
@@ -172,11 +208,16 @@ public class Tabla implements Table{
     //*********************
     Lista3.append(7);
     //*********************
+    Lista4.append(8);
+    Lista4.append(9);
+    Lista4.append(10);
+    //*********************
     Tabla tabla=new Tabla();
     //*********************
     Fila Fila1 =new Fila(Lista1);
     Fila Fila2 =new Fila(Lista2);
     Fila Fila3 =new Fila(Lista3);
+    Fila Fila4 =new Fila(Lista4);
     //*********************
     System.out.println("Añade Fila3");
     System.out.println(tabla.addRow(Fila3));
@@ -191,7 +232,14 @@ public class Tabla implements Table{
     System.out.println(Fil.size());
     //*********************
     System.out.println("ObtenerFila");
-    System.out.println(tabla.getRow(0));
+    System.out.println(tabla.getRow(1));
+    //*********************
+    System.out.println("ActualizarFila");
+    tabla.updateRow(4,Fila4);
+    System.out.println("ACTUALIZO!!");
+    System.out.println(tabla.getRow(4));
     
+    //*
     }
+    //list=new TintArrayList();
 }
