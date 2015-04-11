@@ -22,15 +22,15 @@ public class Columna implements Column{
     public Type DataType;
     public static int ID;
     
-    public Columna(ListaEnlazada Columna, String Name, Type DataType){
+    public Columna(ListaEnlazada Columna, String Name, Type DataType, Tabla Tabla){
         this.Columna = Columna;
-        Datos=new ColumnData(Columna, this.ID, Name, DataType);
+        Datos=new ColumnData(Columna, this.ID, Name, DataType, Tabla);
         this.ID++;
     }
     
-    public Columna(ListaEnlazada Columna, String Name, Type DataType, int ID){
+    public Columna(ListaEnlazada Columna, String Name, Type DataType, int ID, Tabla Tabla){
         this.Columna = Columna;
-        Datos=new ColumnData(Columna, ID, Name, DataType);
+        Datos=new ColumnData(Columna, ID, Name, DataType, Tabla);
     }
     
     public ColumnMetaData getMetaData() {

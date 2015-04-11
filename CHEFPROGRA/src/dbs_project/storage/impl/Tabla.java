@@ -58,7 +58,7 @@ public class Tabla implements Table{
             Columna= (Columna) ColumnaCursor.Columnas.current.getElemento();
             if (Columna.getMetaData().getId()==columnId){
                 NuevaColumna = new Columna(Columna.Columna, newColumnName, 
-                        Columna.getMetaData().getType(), Columna.getMetaData().getId());
+                        Columna.getMetaData().getType(), Columna.getMetaData().getId(), this);
                 ColumnaCursor.Columnas.current.setElemento(NuevaColumna);
                 return;
             }
@@ -72,7 +72,7 @@ public class Tabla implements Table{
     @Override
     public int createColumn(String columnName, Type columnType) throws ColumnAlreadyExistsException {
         ListaEnlazada Lista = new ListaEnlazada();
-        Columna Columna = new Columna(Lista, columnName, columnType);
+        Columna Columna = new Columna(Lista, columnName, columnType, this);
         ColumnaCursor.Columnas.append(Columna);
         ListaNames.append(columnName);
         ListaMetaDatas.append(Columna.getMetaData());
@@ -284,10 +284,10 @@ public class Tabla implements Table{
         Lista4.append(11);
         Lista4.append(12);
         //*********************
-        Columna Columna1 =new Columna(Lista1, "1 a 3", Type.INTEGER);
-        Columna Columna2 =new Columna(Lista2, "4 a 6", Type.INTEGER);
-        Columna Columna3 =new Columna(Lista3, "7 a 9", Type.INTEGER);
-        Columna Columna4 =new Columna(Lista4, "10 a 12", Type.INTEGER);
+        Columna Columna1 =new Columna(Lista1, "1 a 3", Type.INTEGER, Tabla);
+        Columna Columna2 =new Columna(Lista2, "4 a 6", Type.INTEGER, Tabla);
+        Columna Columna3 =new Columna(Lista3, "7 a 9", Type.INTEGER, Tabla);
+        Columna Columna4 =new Columna(Lista4, "10 a 12", Type.INTEGER, Tabla);
         //*********************
         System.out.println("se añade Columna 1 a 3");
         System.out.println(Tabla.addColumn(Columna1));
@@ -335,7 +335,7 @@ public class Tabla implements Table{
         ListaNueva.append(13);
         ListaNueva.append(14);
         ListaNueva.append(15);
-        Columna ColumnaNueva = new Columna(ListaNueva, "13 a 15", Type.INTEGER, 1);
+        Columna ColumnaNueva = new Columna(ListaNueva, "13 a 15", Type.INTEGER, 1, Tabla);
         Tabla.updateColumn(1, ColumnaNueva);
         System.out.println(Tabla.getColumn(1).getMetaData().getName());
     /**ListaEnlazada Lista1= new ListaEnlazada();

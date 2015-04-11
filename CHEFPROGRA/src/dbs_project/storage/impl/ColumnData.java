@@ -21,27 +21,21 @@ public class ColumnData implements ColumnMetaData{
     public int ID;
     public FilaCursor Cursor;
     
-    public ColumnData(ListaEnlazada Columna, int ID, String Name, Tabla Tabla){
+    public ColumnData(ListaEnlazada Columna, int ID, String Name, Type DataType, Tabla Tabla){
         this.Columna = Columna;
         this.ID = ID;
         this.Name = Name;
+        this.DataType = DataType;
         this.Tabla = Tabla;
     }
-    
+    /**
     public ColumnData(ListaEnlazada Columna, int ID, String Name, Type DataType){
         this.Columna = Columna;
         this.ID = ID;
         this.Name = Name;
         this.DataType = DataType;
     }
-    
-    public ColumnData(ListaEnlazada Columna, int ID, String Name, FilaCursor Cursor){
-        this.Columna = Columna;
-        this.ID = ID;
-        this.Name = Name;
-        this.Cursor = Cursor;
-    }
-    
+    **/
     @Override
     public int getRowCount() {     
         return Columna.size();
