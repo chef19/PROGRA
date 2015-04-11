@@ -35,19 +35,19 @@ public class FilaCursor implements RowCursor{
     }
 
     @Override
-    public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Integer getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
          fila=(Fila) Filas.current.getElemento();
          return (int) fila.getInteger(index);
     }
 
     @Override
-    public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
         fila=(Fila) Filas.current.getElemento();
         return (boolean) fila.getBoolean(index);
     }
 
     @Override
-    public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
         fila=(Fila) Filas.current.getElemento();
         return (double) fila.getDouble(index);
     }

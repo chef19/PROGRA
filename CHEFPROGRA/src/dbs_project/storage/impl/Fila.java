@@ -33,21 +33,30 @@ public class Fila implements Row {
     }
 
     @Override
-    public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
-            Fila.goToPos(index);
-            return (int) Fila.getElement();
+    public Integer getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
+        Fila.goToPos(index);
+        if (Fila.getElement()==null){
+            return null;
+        }
+        return (int) Fila.getElement();
         
     }
 
     @Override
-    public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
         Fila.goToPos(index);
+        if (Fila.getElement()==null){
+            return null;
+        }
         return (boolean) Fila.getElement();
     }
 
     @Override
-    public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
         Fila.goToPos(index);
+        if (Fila.getElement()==null){
+            return null;
+        }
         return (double) Fila.getElement();
     }
 

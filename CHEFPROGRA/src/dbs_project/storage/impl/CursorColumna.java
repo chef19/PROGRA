@@ -35,19 +35,19 @@ public class CursorColumna implements ColumnCursor{
     }
 
     @Override
-    public int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Integer getInteger(int index) throws IndexOutOfBoundsException, ClassCastException {
         Columna=(Columna) Columnas.current.getElemento();
         return Columna.getInteger(index);
     }
 
     @Override
-    public boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException {
         Columna=(Columna) Columnas.current.getElemento();
         return Columna.getBoolean(index);
     }
 
     @Override
-    public double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
+    public Double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException {
         Columna=(Columna) Columnas.current.getElemento();
         return Columna.getDouble(index);
     }

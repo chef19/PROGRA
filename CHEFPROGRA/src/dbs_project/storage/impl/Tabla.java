@@ -34,6 +34,8 @@ public class Tabla implements Table{
     
     public Tabla(){
         Fil = new ListaEnlazada();
+        Columnas = new ListaEnlazada();
+        ColumnaCursor = new CursorColumna();
     }
     public Tabla(Row fila){
 
@@ -44,14 +46,30 @@ public class Tabla implements Table{
     }
     @Override
     public void renameColumn(int columnId, String newColumnName) throws ColumnAlreadyExistsException, NoSuchColumnException {
-        
+        ColumnaCursor = new CursorColumna(Columnas);
+        Columna Columna;
+        Columna NuevaColumna;
+        int i=0;
+        while(i<=ColumnaCursor.Columnas.size()){
+            Columna= (Columna) ColumnaCursor.Columnas.current.getElemento();
+            if (Columna.getMetaData().getId()==columnId){
+                NuevaColumna = new Columna(Columna.Columna, newColumnName, 
+                        Columna.getMetaData().getType(), Columna.getMetaData().getId());
+                ColumnaCursor.Columnas.current.setElemento(NuevaColumna);
+            }
+            else{
+                ColumnaCursor.next();
+                i++;
+            }
+        }
     }
 
     @Override
     public int createColumn(String columnName, Type columnType) throws ColumnAlreadyExistsException {
         ListaEnlazada Lista = new ListaEnlazada();
         Columna Columna = new Columna(Lista, columnName, columnType);
-        return(Columna.Datos.getId());
+        ColumnaCursor.Columnas.append(Columna);
+        return(Columna.getMetaData().getId());
     }
 
     @Override
@@ -67,7 +85,8 @@ public class Tabla implements Table{
 
     @Override
     public int addColumn(Column column) throws SchemaMismatchException, ColumnAlreadyExistsException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ColumnaCursor.Columnas.append(column);
+        return(column.getMetaData().getId());
     }
 
     @Override
@@ -77,30 +96,8 @@ public class Tabla implements Table{
 
     @Override
     public void deleteRow(int rowID) throws NoSuchRowException {
-        int i=0;
-        while(i<Fil.size()){
-            Fila temp=(Fila) Fil.current.getElemento();
-            if(temp.getMetaData().getId()==rowID){
-                Fil.remove();
-                Fil.goToStart();
-            }
-            Fil.next();
-        }
-        
-        
-        /**FilCursor = new FilaCursor(Fil);
-        Fil.current.
-        for(int i=0;FilCursor.getMetaData().getId()==rowID;i++){
-            if(i==FilCursor.Filas.size()){
-                return;
-            }
-            FilCursor.next();
-        }
-        int temp;
-        temp= (int) FilCursor.Filas.getPosition();    
-        Fil.goToPos(temp);
+        Fil.goToPos(rowID);
         Fil.remove();
-        FilCursor = new FilaCursor(Fil);**/
     }
 
     @Override
@@ -113,7 +110,19 @@ public class Tabla implements Table{
 
     @Override
     public void dropColumn(int columnId) throws NoSuchColumnException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ColumnaCursor = new CursorColumna(Columnas);
+        Columna Columna;
+        int i=0;
+        while(i<=ColumnaCursor.Columnas.size()){
+            Columna= (Columna) ColumnaCursor.Columnas.current.getElemento();
+            if (Columna.getMetaData().getId()==columnId){
+                ColumnaCursor.Columnas.remove();
+            }
+            else{
+                ColumnaCursor.next();
+                i++;
+            }
+        }
     }
 
     @Override
@@ -233,41 +242,84 @@ public class Tabla implements Table{
         }
         return null;
     }
-    public static void main(String[] args) throws SchemaMismatchException, NoSuchRowException {
+    public static void main(String[] args) throws SchemaMismatchException, NoSuchRowException, ColumnAlreadyExistsException {
         // TODO code application logic here
-    ListaEnlazada Lista1= new ListaEnlazada();
+        Tabla Tabla = new Tabla();
+        ListaEnlazada Lista1= new ListaEnlazada();
+        ListaEnlazada Lista2= new ListaEnlazada();
+        ListaEnlazada Lista3= new ListaEnlazada();
+        ListaEnlazada Lista4= new ListaEnlazada();
+        //*********************
+        Lista1.append(1);
+        Lista1.append(2);
+        Lista1.append(3);
+        //*********************
+        Lista2.append(4);
+        Lista2.append(5);
+        Lista2.append(6);
+        //*********************
+        Lista3.append(7);
+        Lista3.append(8);
+        Lista3.append(9);
+        //*********************
+        Lista4.append(10);
+        Lista4.append(11);
+        Lista4.append(12);
+        //*********************
+        Columna Columna1 =new Columna(Lista1, "1 a 3", Type.INTEGER);
+        Columna Columna2 =new Columna(Lista2, "4 a 6", Type.INTEGER);
+        Columna Columna3 =new Columna(Lista3, "7 a 9", Type.INTEGER);
+        Columna Columna4 =new Columna(Lista4, "10 a 12", Type.INTEGER);
+        //*********************
+        System.out.println("se añade columna1");
+        System.out.println(Tabla.addColumn(Columna1));
+        
+        System.out.println("se añade columna2");
+        System.out.println(Tabla.addColumn(Columna2));
+        
+        System.out.println("se añade columna4");
+        System.out.println(Tabla.addColumn(Columna4));
+        
+        System.out.println("se añade columna3");
+        System.out.println(Tabla.addColumn(Columna3));
+        //*********************
+        
+                   
+    /**ListaEnlazada Lista1= new ListaEnlazada();
     ListaEnlazada Lista2= new ListaEnlazada();
     ListaEnlazada Lista3= new ListaEnlazada();
     ListaEnlazada Lista4= new ListaEnlazada();
-    ListaEnlazada FilasD= new ListaEnlazada();
+    ListaEnlazada ColumnasD= new ListaEnlazada();
     //*********************
     Lista1.append(1);
     Lista1.append(2);
+    Lista1.append(3);
     //*********************
-    Lista2.append(3);
     Lista2.append(4);
     Lista2.append(5);
     Lista2.append(6);
     //*********************
     Lista3.append(7);
+    Lista3.append(8);
+    Lista3.append(9);
     //*********************
-    Lista4.append(8);
-    Lista4.append(9);
     Lista4.append(10);
+    Lista4.append(11);
+    Lista4.append(12);
     //*********************
     Tabla tabla=new Tabla();
     //*********************
-    Fila Fila1 =new Fila(Lista1);
-    Fila Fila2 =new Fila(Lista2);
-    Fila Fila3 =new Fila(Lista3);
-    Fila Fila4 =new Fila(Lista4);
-    FilasD.append(Fila1);
-    FilasD.append(Fila2);
-    FilasD.append(Fila3);
-    FilasD.append(Fila4);
+    Columna Columna1 =new Columna(Lista1, "1 a 3", Type.INTEGER);
+    Columna Columna2 =new Columna(Lista2, "4 a 6", Type.INTEGER);
+    Columna Columna3 =new Columna(Lista3, "7 a 9", Type.INTEGER);
+    Columna Columna4 =new Columna(Lista4, "10 a 12", Type.INTEGER);
+    ColumnasD.append(Columna1);
+    ColumnasD.append(Columna2);
+    ColumnasD.append(Columna3);
+    ColumnasD.append(Columna4);
     //*********************
-    System.out.println("Añade Fila3");
-    System.out.println(tabla.addRow(Fila3));
+    System.out.println("Añade Columna3");
+    System.out.println(tabla.addRow(Columna3));
     
     System.out.println("Añade Fila1");
     System.out.println(tabla.addRow(Fila1));
@@ -285,20 +337,13 @@ public class Tabla implements Table{
     System.out.println("Posicion Cursor");
     System.out.println(Cursor.getCursorPosition());
     System.out.println(Cursor.getMetaData().getId());
-    System.out.println("Posicion "+ Cursor.Filas.getPosition());
-    System.out.println("Posicion Fil"+ Fil.getPosition());
+    
     
     Cursor.next();
-    System.out.println("Posicion "+ Cursor.Filas.getPosition());
-    System.out.println("Posicion Fil"+ Fil.getPosition());
     System.out.println(Cursor.Filas.current.getElemento());
     System.out.println("Busq ID2  "+tabla.getRow(1));
     //*********************
-    System.out.println("Eliminar");
-    tabla.deleteRow(3);
-    System.out.println(Fil.size());
-    
-    //*********************
+    **/
     }
 }
  

@@ -27,21 +27,21 @@ public interface GenericLinearReadAccessible {
      * @param index - the first index is 0, the second is 1, ...
      * @return the value on this position; if the value is NULL, the value returned is Type.NULL_VALUE_INTEGER
      */
-    int getInteger(int index) throws IndexOutOfBoundsException, ClassCastException;
+    Integer getInteger(int index) throws IndexOutOfBoundsException, ClassCastException;
 
     /**
      *
      * @param index - the first index is 0, the second is 1, ...
      * @return the value on this position; if the value is NULL, the value returned is Type.NULL_VALUE_BOOLEAN
      */
-    boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException;
+    Boolean getBoolean(int index) throws IndexOutOfBoundsException, ClassCastException;
 
     /**
      *
      * @param index - the first column is 0, the second is 1, ...
      * @return the value on this position; if the value is NULL, the value returned is Type.NULL_VALUE_DOUBLE
      */
-    double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException;
+    Double getDouble(int index) throws IndexOutOfBoundsException, ClassCastException;
 
     /**
      *

@@ -5,7 +5,7 @@ import dbs_project.structures.LinearDataStructure;
 /**
  * This interface represents the Queue1 data structure (as seen in class).
  * 
- * @author Isaac Alp�zar Chac�n
+ * @author Isaac Alpizar Chacon
  *
  * @param <T>
  */
