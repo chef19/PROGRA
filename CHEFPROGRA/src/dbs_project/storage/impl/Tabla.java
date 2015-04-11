@@ -77,8 +77,30 @@ public class Tabla implements Table{
 
     @Override
     public void deleteRow(int rowID) throws NoSuchRowException {
-        Fil.goToPos(rowID);
+        int i=0;
+        while(i<Fil.size()){
+            Fila temp=(Fila) Fil.current.getElemento();
+            if(temp.getMetaData().getId()==rowID){
+                Fil.remove();
+                Fil.goToStart();
+            }
+            Fil.next();
+        }
+        
+        
+        /**FilCursor = new FilaCursor(Fil);
+        Fil.current.
+        for(int i=0;FilCursor.getMetaData().getId()==rowID;i++){
+            if(i==FilCursor.Filas.size()){
+                return;
+            }
+            FilCursor.next();
+        }
+        int temp;
+        temp= (int) FilCursor.Filas.getPosition();    
+        Fil.goToPos(temp);
         Fil.remove();
+        FilCursor = new FilaCursor(Fil);**/
     }
 
     @Override
@@ -114,6 +136,7 @@ public class Tabla implements Table{
                 i++;
             }
         }
+        return null;
     }
 
     @Override
@@ -262,11 +285,19 @@ public class Tabla implements Table{
     System.out.println("Posicion Cursor");
     System.out.println(Cursor.getCursorPosition());
     System.out.println(Cursor.getMetaData().getId());
-    
+    System.out.println("Posicion "+ Cursor.Filas.getPosition());
+    System.out.println("Posicion Fil"+ Fil.getPosition());
     
     Cursor.next();
+    System.out.println("Posicion "+ Cursor.Filas.getPosition());
+    System.out.println("Posicion Fil"+ Fil.getPosition());
     System.out.println(Cursor.Filas.current.getElemento());
     System.out.println("Busq ID2  "+tabla.getRow(1));
+    //*********************
+    System.out.println("Eliminar");
+    tabla.deleteRow(3);
+    System.out.println(Fil.size());
+    
     //*********************
     }
 }

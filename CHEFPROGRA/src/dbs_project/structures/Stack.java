@@ -5,7 +5,7 @@ import dbs_project.structures.LinearDataStructure;
 /**
  * This interface represents the Stack data structure (as seen in class).
  * 
- * @author  Isaac Alpízar Chacón
+ * @author  Isaac Alpzar Chacn
  *
  * @param <T>
  */

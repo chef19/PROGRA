@@ -7,6 +7,8 @@ package dbs_project.storage.impl;
 
 import dbs_project.storage.ColumnMetaData;
 import dbs_project.storage.TableMetaData;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -17,20 +19,31 @@ public class TablaMetaData implements TableMetaData{
 
     public int ID;
     public String Name;
+    public Tabla Data;
+    Map<String, ColumnMetaData> map;
     
     public TablaMetaData(int ID, String Name){
+        map = new HashMap<String,ColumnMetaData>();
         this.ID = ID;
         this.Name = Name;
+    }
+    public void InsertMap(ColumnData ColumnaInfo){
+        map.put(Name, ColumnaInfo);
     }
     
     @Override
     public Map<String, ColumnMetaData> getTableSchema() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Iterator it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry e = (Map.Entry)it.next();
+            System.out.println(e.getKey() + " " + e.getValue());
+        }
+        return null;
     }
 
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Data.FilCursor.Filas.size();
     }
 
     @Override
@@ -41,6 +54,22 @@ public class TablaMetaData implements TableMetaData{
     @Override
     public String getName() {
         return Name;
+    }
+    
+    public static void main(String[] args) {
+        HashMap datos = new HashMap();
+ 
+        // Añadimos datos a nuestro hashMap
+        datos.put("Nombre","David");
+        datos.put("Apellido1","Otero");
+        datos.put("Apellido2","Gutiérrez");
+
+        // Recorremos el hashMap y mostramos por pantalla el par valor y clave
+        Iterator it = datos.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry e = (Map.Entry)it.next();
+            System.out.println(e.getKey() + " " + e.getValue());
+        }
     }
     
 }
