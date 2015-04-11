@@ -56,7 +56,7 @@ public class ListaEnlazada<T> implements LinearList<T> {
 	}
         tail.setNext(NuevoNodo);
         tail=tail.getNext();
-        size++;    
+        size++;
     }
 
     @Override

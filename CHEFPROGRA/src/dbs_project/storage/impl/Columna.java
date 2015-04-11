@@ -24,8 +24,8 @@ public class Columna implements Column{
     
     public Columna(ListaEnlazada Columna, String Name, Type DataType){
         this.Columna = Columna;
-        Datos=new ColumnData(Columna, ID, Name, DataType);
-        ID++;
+        Datos=new ColumnData(Columna, this.ID, Name, DataType);
+        this.ID++;
     }
     
     public Columna(ListaEnlazada Columna, String Name, Type DataType, int ID){

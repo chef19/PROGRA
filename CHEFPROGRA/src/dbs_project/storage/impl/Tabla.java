@@ -26,6 +26,8 @@ import org.apache.commons.collections.primitives.IntIterator;
 public class Tabla implements Table{
     static ListaEnlazada Fil;
     CursorColumna ColumnaCursor;
+    ListaEnlazada ListaNames;
+    ListaEnlazada ListaMetaDatas;
     static ListaEnlazada Columnas;
     FilaCursor FilCursor;
     
@@ -36,6 +38,8 @@ public class Tabla implements Table{
         Fil = new ListaEnlazada();
         Columnas = new ListaEnlazada();
         ColumnaCursor = new CursorColumna(Columnas);
+        ListaNames = new ListaEnlazada();
+        ListaMetaDatas = new ListaEnlazada();
     }
     public Tabla(Row fila){
 
@@ -50,7 +54,7 @@ public class Tabla implements Table{
         Columna Columna;
         Columna NuevaColumna;
         int i=0;
-        while(i<=ColumnaCursor.Columnas.size())
+        while(i<=ColumnaCursor.Columnas.size()){
             Columna= (Columna) ColumnaCursor.Columnas.current.getElemento();
             if (Columna.getMetaData().getId()==columnId){
                 NuevaColumna = new Columna(Columna.Columna, newColumnName, 
@@ -70,6 +74,8 @@ public class Tabla implements Table{
         ListaEnlazada Lista = new ListaEnlazada();
         Columna Columna = new Columna(Lista, columnName, columnType);
         ColumnaCursor.Columnas.append(Columna);
+        ListaNames.append(columnName);
+        ListaMetaDatas.append(Columna.getMetaData());
         return(Columna.getMetaData().getId());
     }
 
@@ -86,7 +92,9 @@ public class Tabla implements Table{
 
     @Override
     public int addColumn(Column column) throws SchemaMismatchException, ColumnAlreadyExistsException {
-        ColumnaCursor.Columnas.append(column);
+        Columnas.append(column);
+        ListaNames.append(column.getMetaData().getName());
+        ListaMetaDatas.append(column.getMetaData());
         return(column.getMetaData().getId());
     }
 
@@ -117,6 +125,10 @@ public class Tabla implements Table{
         while(i<=ColumnaCursor.Columnas.size()){
             Columna= (Columna) ColumnaCursor.Columnas.current.getElemento();
             if (Columna.getMetaData().getId()==columnId){
+                ListaNames.goToPos(i);
+                ListaMetaDatas.goToPos(i);
+                ListaNames.remove();
+                ListaMetaDatas.remove();
                 ColumnaCursor.Columnas.remove();
                 return;
             }
@@ -143,7 +155,7 @@ public class Tabla implements Table{
                 return Columna;
             }
             else{
-                ColumnaCursor.next();
+                ColumnaCursor.Columnas.goToPos(i-1);
                 i++;
             }
         }
@@ -194,13 +206,17 @@ public class Tabla implements Table{
         Columna Columna;
         int i=0;
         while(i<=ColumnaCursor.Columnas.size()){
+            ColumnaCursor.Columnas.goToPos(i-1);
             Columna= (Columna) ColumnaCursor.Columnas.current.getElemento();
             if (Columna.getMetaData().getId()==columnId){
+                ListaNames.goToPos(i);
+                ListaNames.current.setElemento(updateColumn.getMetaData().getName());
                 ColumnaCursor.Columnas.current.setElemento(updateColumn);
+                ListaMetaDatas.goToPos(i);
+                ListaMetaDatas.current.setElemento(updateColumn.getMetaData());
                 return;
             }
             else{
-                ColumnaCursor.next();
                 i++;
             }
         }
@@ -285,11 +301,43 @@ public class Tabla implements Table{
         System.out.println("se añade Columna 7 a 9");
         System.out.println(Tabla.addColumn(Columna3));
         //*********************
+        /**
         System.out.println("se cambia el nombre de la Columna '7 a 9' a '9 a 7'");
+        System.out.println(Tabla.getColumn(3).getMetaData().getName());
         Tabla.renameColumn(2, "9 a 7");
         System.out.println("ya se cambio");
-        System.out.println(Tabla.getColumn(2).getMetaData().getName());
-                   
+        System.out.println(Tabla.getColumn(3).getMetaData().getName());
+        **/
+        System.out.println("********************************");
+        CursorColumna Cursor = new CursorColumna(Columnas);
+        System.out.println(Cursor.getMetaData().getName());
+        System.out.println(Cursor.next());
+        System.out.println(Cursor.getMetaData().getName());
+        System.out.println(Cursor.next());
+        System.out.println(Cursor.getMetaData().getName());
+        System.out.println(Cursor.next());
+        System.out.println(Cursor.getMetaData().getName());
+        System.out.println("********************************");
+        //*********************
+        System.out.println("Se busca Columna '1 a 3'");
+        System.out.println(Tabla.getColumn(0).getMetaData().getName());
+        System.out.println("Se busca Columna '10 a 12'");
+        System.out.println(Tabla.getColumn(3).getMetaData().getName());
+        System.out.println("********************************");
+        //*********************
+        System.out.println("Se elimina '10 a 12'");
+        Tabla.dropColumn(3);
+        System.out.println(Tabla.Columnas.size());
+        System.out.println("********************************");
+        //*********************
+        System.out.println("Se actualiza '1 a 3' con los valores 13,14,15");
+        ListaEnlazada ListaNueva= new ListaEnlazada();
+        ListaNueva.append(13);
+        ListaNueva.append(14);
+        ListaNueva.append(15);
+        Columna ColumnaNueva = new Columna(ListaNueva, "13 a 15", Type.INTEGER, 1);
+        Tabla.updateColumn(1, ColumnaNueva);
+        System.out.println(Tabla.getColumn(1).getMetaData().getName());
     /**ListaEnlazada Lista1= new ListaEnlazada();
     ListaEnlazada Lista2= new ListaEnlazada();
     ListaEnlazada Lista3= new ListaEnlazada();
