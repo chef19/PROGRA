@@ -59,7 +59,7 @@ public class ColumnData implements ColumnMetaData{
 
     @Override
     public Type getType() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return DataType;
     }
 
     @Override

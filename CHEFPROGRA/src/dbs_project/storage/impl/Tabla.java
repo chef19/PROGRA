@@ -35,7 +35,7 @@ public class Tabla implements Table{
     public Tabla(){
         Fil = new ListaEnlazada();
         Columnas = new ListaEnlazada();
-        ColumnaCursor = new CursorColumna();
+        ColumnaCursor = new CursorColumna(Columnas);
     }
     public Tabla(Row fila){
 
@@ -50,12 +50,13 @@ public class Tabla implements Table{
         Columna Columna;
         Columna NuevaColumna;
         int i=0;
-        while(i<=ColumnaCursor.Columnas.size()){
+        while(i<=ColumnaCursor.Columnas.size())
             Columna= (Columna) ColumnaCursor.Columnas.current.getElemento();
             if (Columna.getMetaData().getId()==columnId){
                 NuevaColumna = new Columna(Columna.Columna, newColumnName, 
                         Columna.getMetaData().getType(), Columna.getMetaData().getId());
                 ColumnaCursor.Columnas.current.setElemento(NuevaColumna);
+                return;
             }
             else{
                 ColumnaCursor.next();
@@ -117,6 +118,7 @@ public class Tabla implements Table{
             Columna= (Columna) ColumnaCursor.Columnas.current.getElemento();
             if (Columna.getMetaData().getId()==columnId){
                 ColumnaCursor.Columnas.remove();
+                return;
             }
             else{
                 ColumnaCursor.next();
@@ -242,7 +244,7 @@ public class Tabla implements Table{
         }
         return null;
     }
-    public static void main(String[] args) throws SchemaMismatchException, NoSuchRowException, ColumnAlreadyExistsException {
+    public static void main(String[] args) throws SchemaMismatchException, NoSuchRowException, ColumnAlreadyExistsException, NoSuchColumnException {
         // TODO code application logic here
         Tabla Tabla = new Tabla();
         ListaEnlazada Lista1= new ListaEnlazada();
@@ -271,19 +273,22 @@ public class Tabla implements Table{
         Columna Columna3 =new Columna(Lista3, "7 a 9", Type.INTEGER);
         Columna Columna4 =new Columna(Lista4, "10 a 12", Type.INTEGER);
         //*********************
-        System.out.println("se añade columna1");
+        System.out.println("se añade Columna 1 a 3");
         System.out.println(Tabla.addColumn(Columna1));
         
-        System.out.println("se añade columna2");
+        System.out.println("se añade Columna 4 a 6");
         System.out.println(Tabla.addColumn(Columna2));
         
-        System.out.println("se añade columna4");
+        System.out.println("se añade Columna 10 a 12");
         System.out.println(Tabla.addColumn(Columna4));
         
-        System.out.println("se añade columna3");
+        System.out.println("se añade Columna 7 a 9");
         System.out.println(Tabla.addColumn(Columna3));
         //*********************
-        
+        System.out.println("se cambia el nombre de la Columna '7 a 9' a '9 a 7'");
+        Tabla.renameColumn(2, "9 a 7");
+        System.out.println("ya se cambio");
+        System.out.println(Tabla.getColumn(2).getMetaData().getName());
                    
     /**ListaEnlazada Lista1= new ListaEnlazada();
     ListaEnlazada Lista2= new ListaEnlazada();
